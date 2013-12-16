@@ -25,7 +25,7 @@ public class TwitterFirehoseSpout extends BaseRichSpout {
 
     TwitterStreamConfiguration twitterStreamConfiguration = TwitterStreamConfigurator.detectConfiguration(StreamsConfigurator.config.getConfig("twitter"));
 
-    TwitterStreamProvider stream = new TwitterStreamProvider(twitterStreamConfiguration, Activity.class);
+    TwitterStreamProvider stream;
 
     Thread provider;
 
@@ -41,6 +41,7 @@ public class TwitterFirehoseSpout extends BaseRichSpout {
     @Override
     public void open(Map map, TopologyContext topologyContext, SpoutOutputCollector spoutOutputCollector) {
         this.collector = spoutOutputCollector;
+        this.stream = new TwitterStreamProvider(twitterStreamConfiguration, Activity.class);
         try {
             provider = (new Thread(stream));
             provider.start();

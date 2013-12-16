@@ -10,16 +10,16 @@ import backtype.storm.utils.Utils;
 import org.apache.streams.config.StreamsConfigurator;
 import org.apache.streams.kafka.KafkaConfiguration;
 import org.apache.streams.kafka.KafkaConfigurator;
+import org.apache.streams.storm.trident.StreamsTopology;
 import org.apache.streams.twitter.TwitterStreamConfiguration;
 import org.apache.streams.twitter.provider.TwitterStreamConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import storm.trident.TridentTopology;
 
 /**
  * Created by sblackmon on 12/10/13.
  */
-public class TwitterFirehoseTopology {
+public class TwitterFirehoseTopology extends StreamsTopology {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(TwitterFirehoseTopology.class);
 
@@ -32,24 +32,24 @@ public class TwitterFirehoseTopology {
         TwitterStreamConfiguration twitterStreamConfiguration = TwitterStreamConfigurator.detectConfiguration(StreamsConfigurator.config.getConfig("twitter"));
         KafkaConfiguration kafkaConfiguration = KafkaConfigurator.detectConfiguration(StreamsConfigurator.config.getConfig("kafka"));
 
-        // replace with trident topology create / submit
-        TridentTopology topology = new TridentTopology();
+        TwitterFirehoseTopology topology = new TwitterFirehoseTopology();
 
         topology.newStream("firehose", new TwitterFirehoseSpout())
                 .parallelismHint(1)
                 .partitionPersist(new KafkaWriterState.Factory(kafkaConfiguration, new KafkaStateController()),
-                        new Fields("heartbeat_json"), new KafkaSendMessage())
+                        new Fields("json"), new KafkaSendMessage())
                 .parallelismHint(3);
 
-        // convert typesafe config into flat properties for storm
-        Config stormConfig = new Config();
-        if (args[1].equalsIgnoreCase("local")) {
+        String runmode = topology.getRunmode();
+        Config stormConfig = topology.getStormConfig();
+
+        if (runmode.equalsIgnoreCase("local")) {
             LocalCluster cluster = new LocalCluster();
             cluster.submitTopology("test", stormConfig, topology.build());
             Utils.sleep(10 * 1000);
             cluster.killTopology("test");
             cluster.shutdown();
-        } else if(args[1].equalsIgnoreCase("deploy")){
+        } else if(runmode.equalsIgnoreCase("deploy")){
             stormConfig.setNumAckers(3);
             stormConfig.setMessageTimeoutSecs(90);
             try {
