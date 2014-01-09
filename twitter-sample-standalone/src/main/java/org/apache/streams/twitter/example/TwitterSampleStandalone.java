@@ -26,13 +26,11 @@ public class TwitterSampleStandalone {
         TwitterStreamConfiguration twitterStreamConfiguration = TwitterStreamConfigurator.detectConfiguration(twitter);
 
         TwitterStreamProvider stream = new TwitterStreamProvider(twitterStreamConfiguration, Activity.class);
-        ConsolePersistWriter console = new ConsolePersistWriter(stream.getOutQueue());
+        ConsolePersistWriter console = new ConsolePersistWriter(stream.getProviderQueue());
 
         try {
-            Thread provider = (new Thread(stream));
-            Thread persister = (new Thread(console));
-            provider.start();
-            persister.start();
+            stream.start();
+            console.start();
         } catch( Exception x ) {
             LOGGER.info(x.getMessage());
         }
