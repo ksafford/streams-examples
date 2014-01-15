@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>twitter-sample-standalone</artifactId>
+    <artifactId>moreover-metabase-storm</artifactId>
 
     <dependencies>
         <dependency>
@@ -24,7 +24,27 @@
         </dependency>
         <dependency>
             <groupId>org.apache.streams</groupId>
-            <artifactId>streams-provider-twitter</artifactId>
+            <artifactId>streams-storm</artifactId>
+            <version>0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>storm</groupId>
+            <artifactId>storm-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.streams</groupId>
+            <artifactId>streams-provider-moreover</artifactId>
+            <version>0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.streams</groupId>
+            <artifactId>streams-persist-kafka</artifactId>
             <version>0.1-SNAPSHOT</version>
         </dependency>
         <dependency>

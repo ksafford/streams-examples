@@ -53,7 +53,7 @@
 
     <modules>
         <module>twitter-sample-standalone</module>
-        <module>twitter-firehose-storm</module>
+        <module>moreover-metabase-storm</module>
     </modules>
 
     <packaging>pom</packaging>
