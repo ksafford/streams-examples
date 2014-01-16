@@ -23,6 +23,8 @@ import org.apache.streams.kafka.KafkaConfigurator;
 import org.apache.streams.kafka.KafkaPersistWriter;
 import org.apache.streams.moreover.MoreoverConfiguration;
 import org.apache.streams.pojo.json.Activity;
+import org.apache.streams.storm.trident.StreamsPersistWriterState;
+import org.apache.streams.storm.trident.StreamsProviderSpout;
 import org.apache.streams.storm.trident.StreamsTopology;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,6 +52,7 @@ public class MoreoverMetabaseTopology extends StreamsTopology {
     {
 
         Config config = StreamsConfigurator.config;
+        Config storm = StreamsConfigurator.config.getConfig("storm");
         Config moreover = StreamsConfigurator.config.getConfig("moreover");
         Config kafka = StreamsConfigurator.config.getConfig("kafka");
 
@@ -58,27 +61,29 @@ public class MoreoverMetabaseTopology extends StreamsTopology {
 
         MoreoverMetabaseTopology topology = new MoreoverMetabaseTopology();
 
-        MoreoverProviderSpout spout = new MoreoverProviderSpout(moreoverConfiguration);
-        KafkaWriterState.Factory writer = new KafkaWriterState.Factory(kafkaConfiguration, new KafkaStateController());
+        MoreoverProvider moreoverProvider = new MoreoverProvider(moreoverConfiguration);
+        StreamsProviderSpout spout = new StreamsProviderSpout(moreoverProvider);
+        KafkaPersistWriter writer = new KafkaPersistWriter(kafkaConfiguration);
+        StreamsPersistWriterState.Factory state = new StreamsPersistWriterState.Factory(writer, new StreamsPersistWriterState.StreamsPersistStateController());
 
         topology.newStream("firehose", spout)
                 .parallelismHint(1)
-                .partitionPersist(writer, spout.getOutputFields(), new KafkaSendMessage())
+                .partitionPersist(state, spout.getOutputFields(), new StreamsPersistWriterState.StreamsPersistWriterSendMessage())
                 .parallelismHint(3);
 
         backtype.storm.Config stormConfig = topology.getStormConfig();
         LOGGER.info(stormConfig.toString());
-        if(stormConfig.size() == 0 ) {
+        if(storm.getString("runmode").equals("local") ) {
             LocalCluster cluster = new LocalCluster();
             stormConfig.setMessageTimeoutSecs(120);
             stormConfig.setNumWorkers(2);
             stormConfig.setMaxSpoutPending(1);
             stormConfig.put(backtype.storm.Config.WORKER_CHILDOPTS, "-Dfile.encoding=UTF-8");
             cluster.submitTopology("test", stormConfig, topology.build());
-            Utils.sleep(10 * 1000);
+            Utils.sleep(60 * 1000);
             cluster.killTopology("test");
             cluster.shutdown();
-        } else {
+        } else if(storm.getString("runmode").equals("deploy") ) {
             stormConfig.setNumAckers(3);
             stormConfig.setMessageTimeoutSecs(90);
             try {
@@ -88,151 +93,11 @@ public class MoreoverMetabaseTopology extends StreamsTopology {
             } catch (InvalidTopologyException e) {
                 e.printStackTrace();
             }
+        } else {
+            LOGGER.error("Please specify storm.runmode := [local,deploy]");
+            LOGGER.error("  StreamsConfig was {}", config.toString());
         }
 
     }
 
-    public static class MoreoverProviderSpout implements IBatchSpout {
-
-        private Logger logger;
-        MoreoverConfiguration moreoverConfiguration;
-
-        public MoreoverProviderSpout(MoreoverConfiguration moreoverConfiguration) {
-            this.moreoverConfiguration = moreoverConfiguration;
-        }
-
-        MoreoverProvider provider;
-        @Override
-        public void open(Map map, TopologyContext topologyContext) {
-            provider = new MoreoverProvider(moreoverConfiguration);
-            provider.start();
-        }
-
-        @Override
-        public synchronized void emitBatch(long l, TridentCollector tridentCollector) {
-            List<StreamsDatum> batch;
-            batch = IteratorUtils.toList(provider.getProviderQueue().iterator());
-            for( StreamsDatum datum : batch ) {
-                tridentCollector.emit( Lists.newArrayList(
-                    datum.getTimestamp(),
-                    datum.getSequenceid(),
-                    datum.getDocument()
-                ));
-            }
-        }
-
-        @Override
-        public void ack(long l) {
-
-        }
-
-        @Override
-        public void close() {
-            provider.stop();
-        }
-
-        @Override
-        public Map getComponentConfiguration() {
-            ObjectMapper mapper = new ObjectMapper();
-            Map<String,Object> mapConfig;
-            mapConfig = mapper.convertValue(moreoverConfiguration, Map.class);
-            return mapConfig;
-        }
-
-        @Override
-        public Fields getOutputFields() {
-            return new Fields("timestamp", "sequenceid", "datum");
-        }
-    };
-
-    public static class KafkaWriterState implements State {
-
-        private Logger logger;
-        private KafkaStateController controller;
-        private KafkaConfiguration kafkaConfig;
-
-        private Queue<StreamsDatum> outQueue;
-
-        public KafkaWriterState(KafkaConfiguration kafkaConfig, KafkaStateController controller) {
-            this.logger = LoggerFactory.getLogger(KafkaWriterState.class);
-            this.kafkaConfig = kafkaConfig;
-            this.controller = controller;
-            this.logger.info("Starting Kafka stat with brokers : {}", kafkaConfig.getBrokerlist());
-            KafkaPersistWriter kafkaPersistWriter = new KafkaPersistWriter(this.kafkaConfig, outQueue);
-            kafkaPersistWriter.start();
-        }
-
-        public void bulkMessagesToKafka(List<TridentTuple> tuples) {
-            for (TridentTuple tuple : tuples) {
-                StreamsDatum datum = this.controller.fromTuple(tuple);
-                try {
-                    outQueue.offer(datum);
-                } catch (Exception e) {
-                    this.logger.error("Exception while passing message to kafka : {}", e, datum);
-                }
-            }
-            this.logger.debug("******** Ending commit to kafka . . .");
-        }
-
-        @Override
-        public void beginCommit(Long aLong) {
-
-        }
-
-        @Override
-        public void commit(Long aLong) {
-
-        }
-
-        public static class Factory implements StateFactory {
-
-            private Logger logger;
-            private KafkaConfiguration config;
-            private KafkaStateController controller;
-
-            public Factory(KafkaConfiguration config, KafkaStateController controller) {
-                this.config = config;
-                this.controller = controller;
-                this.logger = LoggerFactory.getLogger(Factory.class);
-            }
-
-            @Override
-            public State makeState(Map map, IMetricsContext iMetricsContext, int i, int i2) {
-                this.logger.debug("Called makeState. . . ");
-                return new KafkaWriterState(config, controller);
-            }
-
-        }
-
-    }
-
-    public static class KafkaStateController implements Serializable {
-
-        private String fieldName;
-        private ObjectMapper mapper = new ObjectMapper();
-
-        public KafkaStateController() {
-            this.fieldName = "datum";
-        }
-
-        public KafkaStateController(String fieldName) {
-            this.fieldName = fieldName;
-        }
-
-        public StreamsDatum fromTuple(TridentTuple tuple) {
-            return mapper.convertValue(tuple.getValueByField(this.fieldName), StreamsDatum.class);
-        }
-
-    }
-
-    public static class KafkaSendMessage extends BaseStateUpdater<KafkaWriterState> {
-
-        private Logger logger = LoggerFactory.getLogger(KafkaSendMessage.class);
-
-        @Override
-        public void updateState(KafkaWriterState kafkaState, List<TridentTuple> tridentTuples, TridentCollector tridentCollector) {
-            this.logger.debug("****  calling send message. .  .");
-            kafkaState.bulkMessagesToKafka(tridentTuples);
-        }
-    }
 }
