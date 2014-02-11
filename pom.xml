@@ -49,12 +49,18 @@
           <id>clojars.org</id>
           <url>http://clojars.org/repo</url>
         </repository>
+        <repository>
+            <id>maven.twttr.com</id>
+            <url>http://maven.twttr.com/</url>
+        </repository>
+
     </repositories>
 
     <modules>
         <module>twitter-sample-standalone</module>
-        <module>twitter-history-standalone</module>
+        <module>twitter-history-hdfs</module>
         <module>twitter-history-elasticsearch</module>
+        <module>twitter-history-elasticsearch-and-hdfs</module>
         <module>moreover-metabase-storm</module>
     </modules>
 
