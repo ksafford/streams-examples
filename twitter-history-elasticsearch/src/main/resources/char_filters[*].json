@@ -1,0 +1,20 @@
+{
+    "template" : "*",
+    "order" : 1,
+    "settings" : {
+        "index": {
+            "analysis": {
+                "char_filter" : {
+                    "preserve_tokens" : {
+                        "type" : "mapping",
+                        "mappings" : [
+                            "@=>ATINDOC",
+                            "#=>HASHINDOC",
+                            "&=>AMPINDOC"
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}
