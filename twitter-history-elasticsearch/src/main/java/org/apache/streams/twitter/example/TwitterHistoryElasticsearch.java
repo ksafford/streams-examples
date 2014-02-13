@@ -15,11 +15,7 @@ import org.apache.streams.twitter.provider.TwitterTimelineProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Random;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * Created by sblackmon on 12/10/13.
@@ -64,18 +60,25 @@ public class TwitterHistoryElasticsearch implements Runnable {
             LOGGER.info(x.getMessage());
         }
 
-        while( !providerTaskComplete.isDone())
-            try {
-                Thread.sleep(new Random().nextInt(100));
-            } catch (InterruptedException e) { }
+        try {
+            providerTaskComplete.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            return;
+        }
 
-        writer.terminate = true;
-
-        while( !writerTaskComplete.isDone())
-            try {
-                Thread.sleep(new Random().nextInt(100));
-            } catch (InterruptedException e) { }
-
+        try {
+            writerTaskComplete.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            return;
+        }
     }
 
     private static ExecutorService newFixedThreadPoolWithQueueSize(int nThreads, int queueSize) {
