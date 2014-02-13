@@ -57,6 +57,7 @@
     </repositories>
 
     <modules>
+        <module>elasticsearch-reindex</module>
         <module>twitter-sample-standalone</module>
         <module>twitter-history-hdfs</module>
         <module>twitter-history-elasticsearch</module>
