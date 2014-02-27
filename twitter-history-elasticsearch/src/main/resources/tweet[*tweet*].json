@@ -1,0 +1,1476 @@
+{
+    "template": "*tweet*",
+    "order": 100,
+    "mappings": {
+        "tweet": {
+            "_timestamp": {
+                "enabled": true
+            },
+            "_all": {
+                "enabled": true
+            },
+            "properties": {
+                "coordinates": {
+                    "include_in_all": false,
+                    "type": "geo_point"
+                },
+                "created_at": {
+                    "include_in_all": false,
+                    "format": "EEE MMM d HH:mm:ss Z yyyy||EEEMMMddHH: mm: ssZyyyy||yyyy/MM/dd HH:mm:ss||yyyy-MM-dd HH:mm:ss||dd-MM-yyyy||yyyy-MM-dd||YYYY-MM-dd'T'HH:mm:ss.SSSZ||EEE, dd MMM yyyy HH:mm:ss Z||YYYY-MM-dd'T'HH:mm:ss.SSSZ||YYYY-MM-dd'T'HH:mm:ssZ||YYYY-MM-dd HH:mm:ss||YYYY-MM-dd'T'HH:mm:ss||YYYYMMdd'T'HH:mm:ss",
+                    "type": "date"
+                },
+                "entities": {
+                    "properties": {
+                        "hashtags": {
+                            "properties": {
+                                "indices": {
+                                    "include_in_all": false,
+                                    "type": "long"
+                                },
+                                "text": {
+                                    "include_in_all": false,
+                                    "analyzer": "w2o_lowercase_analyzer",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "media": {
+                            "properties": {
+                                "display_url": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "expanded_url": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "id": {
+                                    "include_in_all": false,
+                                    "type": "long"
+                                },
+                                "id_str": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "indices": {
+                                    "include_in_all": false,
+                                    "type": "long"
+                                },
+                                "media_url": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "media_url_https": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "sizes": {
+                                    "properties": {
+                                        "large": {
+                                            "properties": {
+                                                "h": {
+                                                    "include_in_all": false,
+                                                    "type": "long"
+                                                },
+                                                "resize": {
+                                                    "include_in_all": false,
+                                                    "index": "not_analyzed",
+                                                    "index_options": "docs",
+                                                    "omit_norms": true,
+                                                    "type": "string"
+                                                },
+                                                "w": {
+                                                    "include_in_all": false,
+                                                    "type": "long"
+                                                }
+                                            }
+                                        },
+                                        "medium": {
+                                            "properties": {
+                                                "h": {
+                                                    "include_in_all": false,
+                                                    "type": "long"
+                                                },
+                                                "resize": {
+                                                    "include_in_all": false,
+                                                    "index": "not_analyzed",
+                                                    "index_options": "docs",
+                                                    "omit_norms": true,
+                                                    "type": "string"
+                                                },
+                                                "w": {
+                                                    "include_in_all": false,
+                                                    "type": "long"
+                                                }
+                                            }
+                                        },
+                                        "small": {
+                                            "properties": {
+                                                "h": {
+                                                    "include_in_all": false,
+                                                    "type": "long"
+                                                },
+                                                "resize": {
+                                                    "include_in_all": false,
+                                                    "index": "not_analyzed",
+                                                    "index_options": "docs",
+                                                    "omit_norms": true,
+                                                    "type": "string"
+                                                },
+                                                "w": {
+                                                    "include_in_all": false,
+                                                    "type": "long"
+                                                }
+                                            }
+                                        },
+                                        "thumb": {
+                                            "properties": {
+                                                "h": {
+                                                    "include_in_all": false,
+                                                    "type": "long"
+                                                },
+                                                "resize": {
+                                                    "include_in_all": false,
+                                                    "index": "not_analyzed",
+                                                    "index_options": "docs",
+                                                    "omit_norms": true,
+                                                    "type": "string"
+                                                },
+                                                "w": {
+                                                    "include_in_all": false,
+                                                    "type": "long"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "source_status_id": {
+                                    "include_in_all": false,
+                                    "type": "long"
+                                },
+                                "source_status_id_str": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "url": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "symbols": {
+                            "properties": {
+                                "indices": {
+                                    "include_in_all": false,
+                                    "type": "long"
+                                },
+                                "text": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "urls": {
+                            "properties": {
+                                "display_url": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "expanded_url": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "indices": {
+                                    "include_in_all": false,
+                                    "type": "long"
+                                },
+                                "url": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "user_mentions": {
+                            "properties": {
+                                "id": {
+                                    "include_in_all": false,
+                                    "type": "long"
+                                },
+                                "id_str": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "indices": {
+                                    "include_in_all": false,
+                                    "type": "long"
+                                },
+                                "name": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "screen_name": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "favorite_count": {
+                    "include_in_all": false,
+                    "type": "long"
+                },
+                "favorited": {
+                    "include_in_all": false,
+                    "type": "boolean"
+                },
+                "geo": {
+                    "properties": {
+                        "coordinates": {
+                            "include_in_all": false,
+                            "type": "double"
+                        },
+                        "type": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        }
+                    }
+                },
+                "id": {
+                    "include_in_all": false,
+                    "type": "long"
+                },
+                "id_str": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "index_options": "docs",
+                    "omit_norms": true,
+                    "type": "string"
+                },
+                "in_reply_to_screen_name": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "index_options": "docs",
+                    "omit_norms": true,
+                    "type": "string"
+                },
+                "in_reply_to_status_id": {
+                    "include_in_all": false,
+                    "type": "long"
+                },
+                "in_reply_to_status_id_str": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "index_options": "docs",
+                    "omit_norms": true,
+                    "type": "string"
+                },
+                "in_reply_to_user_id": {
+                    "include_in_all": false,
+                    "type": "long"
+                },
+                "in_reply_to_user_id_str": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "index_options": "docs",
+                    "omit_norms": true,
+                    "type": "string"
+                },
+                "lang": {
+                    "include_in_all": false,
+                    "type": "string"
+                },
+                "place": {
+                    "properties": {
+                        "attributes": {
+                            "properties": {
+                                "locality": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "region": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "street_address": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "bounding_box": {
+                            "properties": {
+                                "coordinates": {
+                                    "include_in_all": false,
+                                    "type": "double"
+                                },
+                                "type": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "country": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "country_code": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "full_name": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "id": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "name": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "place_type": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "url": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        }
+                    }
+                },
+                "possibly_sensitive": {
+                    "include_in_all": false,
+                    "type": "boolean"
+                },
+                "retweet_count": {
+                    "include_in_all": false,
+                    "type": "long"
+                },
+                "retweeted": {
+                    "include_in_all": false,
+                    "type": "boolean"
+                },
+                "retweeted_status": {
+                    "properties": {
+                        "contributors": {
+                            "include_in_all": false,
+                            "type": "long"
+                        },
+                        "coordinates": {
+                            "properties": {
+                                "coordinates": {
+                                    "include_in_all": false,
+                                    "type": "double"
+                                },
+                                "type": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "created_at": {
+                            "include_in_all": false,
+                            "format": "EEE MMM d HH:mm:ss Z yyyy||EEEMMMddHH: mm: ssZyyyy||yyyy/MM/dd HH:mm:ss||yyyy-MM-dd HH:mm:ss||dd-MM-yyyy||yyyy-MM-dd||YYYY-MM-dd'T'HH:mm:ss.SSSZ||EEE, dd MMM yyyy HH:mm:ss Z||YYYY-MM-dd'T'HH:mm:ss.SSSZ||YYYY-MM-dd'T'HH:mm:ssZ||YYYY-MM-dd'T'HH:mm:ss||YYYYMMdd'T'HH:mm:ss",
+                            "type": "date"
+                        },
+                        "entities": {
+                            "properties": {
+                                "hashtags": {
+                                    "properties": {
+                                        "indices": {
+                                            "include_in_all": false,
+                                            "type": "long"
+                                        },
+                                        "text": {
+                                            "include_in_all": false,
+                                            "index": "not_analyzed",
+                                            "index_options": "docs",
+                                            "omit_norms": true,
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "media": {
+                                    "properties": {
+                                        "display_url": {
+                                            "include_in_all": false,
+                                            "index": "not_analyzed",
+                                            "index_options": "docs",
+                                            "omit_norms": true,
+                                            "type": "string"
+                                        },
+                                        "expanded_url": {
+                                            "include_in_all": false,
+                                            "index": "not_analyzed",
+                                            "index_options": "docs",
+                                            "omit_norms": true,
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "include_in_all": false,
+                                            "type": "long"
+                                        },
+                                        "id_str": {
+                                            "include_in_all": false,
+                                            "index": "not_analyzed",
+                                            "index_options": "docs",
+                                            "omit_norms": true,
+                                            "type": "string"
+                                        },
+                                        "indices": {
+                                            "include_in_all": false,
+                                            "type": "long"
+                                        },
+                                        "media_url": {
+                                            "include_in_all": false,
+                                            "index": "not_analyzed",
+                                            "index_options": "docs",
+                                            "omit_norms": true,
+                                            "type": "string"
+                                        },
+                                        "media_url_https": {
+                                            "include_in_all": false,
+                                            "index": "not_analyzed",
+                                            "index_options": "docs",
+                                            "omit_norms": true,
+                                            "type": "string"
+                                        },
+                                        "sizes": {
+                                            "properties": {
+                                                "large": {
+                                                    "properties": {
+                                                        "h": {
+                                                            "include_in_all": false,
+                                                            "type": "long"
+                                                        },
+                                                        "resize": {
+                                                            "include_in_all": false,
+                                                            "index": "not_analyzed",
+                                                            "index_options": "docs",
+                                                            "omit_norms": true,
+                                                            "type": "string"
+                                                        },
+                                                        "w": {
+                                                            "include_in_all": false,
+                                                            "type": "long"
+                                                        }
+                                                    }
+                                                },
+                                                "medium": {
+                                                    "properties": {
+                                                        "h": {
+                                                            "include_in_all": false,
+                                                            "type": "long"
+                                                        },
+                                                        "resize": {
+                                                            "include_in_all": false,
+                                                            "index": "not_analyzed",
+                                                            "index_options": "docs",
+                                                            "omit_norms": true,
+                                                            "type": "string"
+                                                        },
+                                                        "w": {
+                                                            "include_in_all": false,
+                                                            "type": "long"
+                                                        }
+                                                    }
+                                                },
+                                                "small": {
+                                                    "properties": {
+                                                        "h": {
+                                                            "include_in_all": false,
+                                                            "type": "long"
+                                                        },
+                                                        "resize": {
+                                                            "include_in_all": false,
+                                                            "index": "not_analyzed",
+                                                            "index_options": "docs",
+                                                            "omit_norms": true,
+                                                            "type": "string"
+                                                        },
+                                                        "w": {
+                                                            "include_in_all": false,
+                                                            "type": "long"
+                                                        }
+                                                    }
+                                                },
+                                                "thumb": {
+                                                    "properties": {
+                                                        "h": {
+                                                            "include_in_all": false,
+                                                            "type": "long"
+                                                        },
+                                                        "resize": {
+                                                            "include_in_all": false,
+                                                            "index": "not_analyzed",
+                                                            "index_options": "docs",
+                                                            "omit_norms": true,
+                                                            "type": "string"
+                                                        },
+                                                        "w": {
+                                                            "include_in_all": false,
+                                                            "type": "long"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "source_status_id": {
+                                            "include_in_all": false,
+                                            "type": "long"
+                                        },
+                                        "source_status_id_str": {
+                                            "include_in_all": false,
+                                            "index": "not_analyzed",
+                                            "index_options": "docs",
+                                            "omit_norms": true,
+                                            "type": "string"
+                                        },
+                                        "type": {
+                                            "include_in_all": false,
+                                            "index": "not_analyzed",
+                                            "index_options": "docs",
+                                            "omit_norms": true,
+                                            "type": "string"
+                                        },
+                                        "url": {
+                                            "include_in_all": false,
+                                            "index": "not_analyzed",
+                                            "index_options": "docs",
+                                            "omit_norms": true,
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "symbols": {
+                                    "properties": {
+                                        "indices": {
+                                            "include_in_all": false,
+                                            "type": "long"
+                                        },
+                                        "text": {
+                                            "include_in_all": false,
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "urls": {
+                                    "properties": {
+                                        "display_url": {
+                                            "include_in_all": false,
+                                            "index": "not_analyzed",
+                                            "index_options": "docs",
+                                            "omit_norms": true,
+                                            "type": "string"
+                                        },
+                                        "expanded_url": {
+                                            "include_in_all": false,
+                                            "index": "not_analyzed",
+                                            "index_options": "docs",
+                                            "omit_norms": true,
+                                            "type": "string"
+                                        },
+                                        "indices": {
+                                            "include_in_all": false,
+                                            "type": "long"
+                                        },
+                                        "url": {
+                                            "include_in_all": false,
+                                            "index": "not_analyzed",
+                                            "index_options": "docs",
+                                            "omit_norms": true,
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "user_mentions": {
+                                    "properties": {
+                                        "id": {
+                                            "include_in_all": false,
+                                            "type": "long"
+                                        },
+                                        "id_str": {
+                                            "include_in_all": false,
+                                            "index": "not_analyzed",
+                                            "index_options": "docs",
+                                            "omit_norms": true,
+                                            "type": "string"
+                                        },
+                                        "indices": {
+                                            "include_in_all": false,
+                                            "type": "long"
+                                        },
+                                        "name": {
+                                            "include_in_all": false,
+                                            "index": "not_analyzed",
+                                            "index_options": "docs",
+                                            "omit_norms": true,
+                                            "type": "string"
+                                        },
+                                        "screen_name": {
+                                            "include_in_all": false,
+                                            "index": "not_analyzed",
+                                            "index_options": "docs",
+                                            "omit_norms": true,
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "favorite_count": {
+                            "include_in_all": false,
+                            "type": "long"
+                        },
+                        "favorited": {
+                            "include_in_all": false,
+                            "type": "boolean"
+                        },
+                        "geo": {
+                            "properties": {
+                                "coordinates": {
+                                    "include_in_all": false,
+                                    "type": "double"
+                                },
+                                "type": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "id": {
+                            "include_in_all": false,
+                            "type": "long"
+                        },
+                        "id_str": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "in_reply_to_screen_name": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "in_reply_to_status_id": {
+                            "include_in_all": false,
+                            "type": "long"
+                        },
+                        "in_reply_to_status_id_str": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "in_reply_to_user_id": {
+                            "include_in_all": false,
+                            "type": "long"
+                        },
+                        "in_reply_to_user_id_str": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "lang": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "place": {
+                            "properties": {
+                                "attributes": {
+                                    "properties": {
+                                        "street_address": {
+                                            "include_in_all": false,
+                                            "index": "not_analyzed",
+                                            "index_options": "docs",
+                                            "omit_norms": true,
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "bounding_box": {
+                                    "properties": {
+                                        "coordinates": {
+                                            "include_in_all": false,
+                                            "type": "double"
+                                        },
+                                        "type": {
+                                            "include_in_all": false,
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "country": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "country_code": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "full_name": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "id": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "place_type": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "url": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "possibly_sensitive": {
+                            "include_in_all": false,
+                            "type": "boolean"
+                        },
+                        "retweet_count": {
+                            "include_in_all": false,
+                            "type": "long"
+                        },
+                        "retweeted": {
+                            "include_in_all": false,
+                            "type": "boolean"
+                        },
+                        "scopes": {
+                            "properties": {
+                                "followers": {
+                                    "include_in_all": false,
+                                    "type": "boolean"
+                                }
+                            }
+                        },
+                        "source": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "text": {
+                            "include_in_all": true,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "truncated": {
+                            "include_in_all": false,
+                            "type": "boolean"
+                        },
+                        "user": {
+                            "properties": {
+                                "contributors_enabled": {
+                                    "include_in_all": false,
+                                    "type": "boolean"
+                                },
+                                "created_at": {
+                                    "include_in_all": false,
+                                    "format": "EEE MMM d HH:mm:ss Z yyyy||EEEMMMddHH: mm: ssZyyyy||yyyy/MM/dd HH:mm:ss||yyyy-MM-dd HH:mm:ss||dd-MM-yyyy||yyyy-MM-dd||YYYY-MM-dd'T'HH:mm:ss.SSSZ||EEE, dd MMM yyyy HH:mm:ss Z||YYYY-MM-dd'T'HH:mm:ss.SSSZ||YYYY-MM-dd'T'HH:mm:ssZ||YYYY-MM-dd'T'HH:mm:ss||YYYYMMdd'T'HH:mm:ss",
+                                    "type": "date"
+                                },
+                                "default_profile": {
+                                    "include_in_all": false,
+                                    "type": "boolean"
+                                },
+                                "default_profile_image": {
+                                    "include_in_all": false,
+                                    "type": "boolean"
+                                },
+                                "description": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "entities": {
+                                    "properties": {
+                                        "description": {
+                                            "properties": {
+                                                "urls": {
+                                                    "properties": {
+                                                        "display_url": {
+                                                            "include_in_all": false,
+                                                            "index": "not_analyzed",
+                                                            "index_options": "docs",
+                                                            "omit_norms": true,
+                                                            "type": "string"
+                                                        },
+                                                        "expanded_url": {
+                                                            "include_in_all": false,
+                                                            "index": "not_analyzed",
+                                                            "index_options": "docs",
+                                                            "omit_norms": true,
+                                                            "type": "string"
+                                                        },
+                                                        "indices": {
+                                                            "include_in_all": false,
+                                                            "index": "not_analyzed",
+                                                            "index_options": "docs",
+                                                            "omit_norms": true,
+                                                            "type": "long"
+                                                        },
+                                                        "url": {
+                                                            "include_in_all": false,
+                                                            "index": "not_analyzed",
+                                                            "index_options": "docs",
+                                                            "omit_norms": true,
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "url": {
+                                            "properties": {
+                                                "urls": {
+                                                    "properties": {
+                                                        "display_url": {
+                                                            "include_in_all": false,
+                                                            "index": "not_analyzed",
+                                                            "index_options": "docs",
+                                                            "omit_norms": true,
+                                                            "type": "string"
+                                                        },
+                                                        "expanded_url": {
+                                                            "include_in_all": false,
+                                                            "index": "not_analyzed",
+                                                            "index_options": "docs",
+                                                            "omit_norms": true,
+                                                            "type": "string"
+                                                        },
+                                                        "indices": {
+                                                            "include_in_all": false,
+                                                            "type": "long"
+                                                        },
+                                                        "url": {
+                                                            "include_in_all": false,
+                                                            "index": "not_analyzed",
+                                                            "index_options": "docs",
+                                                            "omit_norms": true,
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "favourites_count": {
+                                    "include_in_all": false,
+                                    "type": "long"
+                                },
+                                "follow_request_sent": {
+                                    "include_in_all": false,
+                                    "type": "boolean"
+                                },
+                                "followers_count": {
+                                    "include_in_all": false,
+                                    "type": "long"
+                                },
+                                "friends_count": {
+                                    "include_in_all": false,
+                                    "type": "long"
+                                },
+                                "geo_enabled": {
+                                    "include_in_all": false,
+                                    "type": "boolean"
+                                },
+                                "id": {
+                                    "include_in_all": false,
+                                    "type": "long"
+                                },
+                                "id_str": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "is_translator": {
+                                    "include_in_all": false,
+                                    "type": "boolean"
+                                },
+                                "lang": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "listed_count": {
+                                    "include_in_all": false,
+                                    "type": "long"
+                                },
+                                "location": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "profile_background_color": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "profile_background_image_url": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "profile_background_image_url_https": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "profile_background_tile": {
+                                    "include_in_all": false,
+                                    "type": "boolean"
+                                },
+                                "profile_banner_url": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "profile_image_url": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "profile_image_url_https": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "profile_link_color": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "profile_sidebar_border_color": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "profile_sidebar_fill_color": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "profile_text_color": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "profile_use_background_image": {
+                                    "include_in_all": false,
+                                    "type": "boolean"
+                                },
+                                "protected": {
+                                    "include_in_all": false,
+                                    "type": "boolean"
+                                },
+                                "screen_name": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "statuses_count": {
+                                    "include_in_all": false,
+                                    "type": "long"
+                                },
+                                "time_zone": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "url": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
+                                "utc_offset": {
+                                    "include_in_all": false,
+                                    "type": "long"
+                                },
+                                "verified": {
+                                    "include_in_all": false,
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    }
+                },
+                "source": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "index_options": "docs",
+                    "omit_norms": true,
+                    "type": "string"
+                },
+                "text": {
+                    "include_in_all": false,
+                    "analyzer": "w2o_standard_analyzer",
+                    "type": "string",
+                    "fielddata": {
+                        "filter": {
+                            "frequency": {
+                                "min": 0.00001,
+                                "max": 0.99,
+                                "min_segment_size": 500
+                            }
+                        }
+                    }
+                },
+                "truncated": {
+                    "include_in_all": false,
+                    "type": "boolean"
+                },
+                "user": {
+                    "properties": {
+                        "contributors_enabled": {
+                            "include_in_all": false,
+                            "type": "boolean"
+                        },
+                        "created_at": {
+                            "include_in_all": false,
+                            "format": "EEE MMM d HH:mm:ss Z yyyy||EEEMMMddHH: mm: ssZyyyy||yyyy/MM/dd HH:mm:ss||yyyy-MM-dd HH:mm:ss||dd-MM-yyyy||yyyy-MM-dd||YYYY-MM-dd'T'HH:mm:ss.SSSZ||EEE, dd MMM yyyy HH:mm:ss Z||YYYY-MM-dd'T'HH:mm:ss.SSSZ||YYYY-MM-dd'T'HH:mm:ssZ||YYYY-MM-dd'T'HH:mm:ss||YYYYMMdd'T'HH:mm:ss",
+                            "type": "date"
+                        },
+                        "default_profile": {
+                            "include_in_all": false,
+                            "type": "boolean"
+                        },
+                        "default_profile_image": {
+                            "include_in_all": false,
+                            "type": "boolean"
+                        },
+                        "description": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "entities": {
+                            "properties": {
+                                "description": {
+                                    "properties": {
+                                        "urls": {
+                                            "properties": {
+                                                "display_url": {
+                                                    "include_in_all": false,
+                                                    "index": "not_analyzed",
+                                                    "index_options": "docs",
+                                                    "omit_norms": true,
+                                                    "type": "string"
+                                                },
+                                                "expanded_url": {
+                                                    "include_in_all": false,
+                                                    "index": "not_analyzed",
+                                                    "index_options": "docs",
+                                                    "omit_norms": true,
+                                                    "type": "string"
+                                                },
+                                                "indices": {
+                                                    "include_in_all": false,
+                                                    "type": "long"
+                                                },
+                                                "url": {
+                                                    "include_in_all": false,
+                                                    "index": "not_analyzed",
+                                                    "index_options": "docs",
+                                                    "omit_norms": true,
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "properties": {
+                                        "urls": {
+                                            "properties": {
+                                                "display_url": {
+                                                    "include_in_all": false,
+                                                    "index": "not_analyzed",
+                                                    "index_options": "docs",
+                                                    "omit_norms": true,
+                                                    "type": "string"
+                                                },
+                                                "expanded_url": {
+                                                    "include_in_all": false,
+                                                    "index": "not_analyzed",
+                                                    "index_options": "docs",
+                                                    "omit_norms": true,
+                                                    "type": "string"
+                                                },
+                                                "indices": {
+                                                    "include_in_all": false,
+                                                    "type": "long"
+                                                },
+                                                "url": {
+                                                    "include_in_all": false,
+                                                    "index": "not_analyzed",
+                                                    "index_options": "docs",
+                                                    "omit_norms": true,
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "favourites_count": {
+                            "include_in_all": false,
+                            "type": "long"
+                        },
+                        "follow_request_sent": {
+                            "include_in_all": false,
+                            "type": "boolean"
+                        },
+                        "followers_count": {
+                            "include_in_all": false,
+                            "type": "long"
+                        },
+                        "friends_count": {
+                            "include_in_all": false,
+                            "type": "long"
+                        },
+                        "geo_enabled": {
+                            "include_in_all": false,
+                            "type": "boolean"
+                        },
+                        "id": {
+                            "include_in_all": false,
+                            "type": "long"
+                        },
+                        "id_str": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "is_translator": {
+                            "include_in_all": false,
+                            "type": "boolean"
+                        },
+                        "lang": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "listed_count": {
+                            "include_in_all": false,
+                            "type": "long"
+                        },
+                        "location": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "name": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "profile_background_color": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "profile_background_image_url": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "profile_background_image_url_https": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "profile_background_tile": {
+                            "include_in_all": false,
+                            "type": "boolean"
+                        },
+                        "profile_banner_url": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "profile_image_url": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "profile_image_url_https": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "profile_link_color": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "profile_sidebar_border_color": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "profile_sidebar_fill_color": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "profile_text_color": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "profile_use_background_image": {
+                            "include_in_all": false,
+                            "type": "boolean"
+                        },
+                        "protected": {
+                            "include_in_all": false,
+                            "type": "boolean"
+                        },
+                        "screen_name": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "statuses_count": {
+                            "include_in_all": false,
+                            "type": "long"
+                        },
+                        "time_zone": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "url": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "utc_offset": {
+                            "include_in_all": false,
+                            "type": "long"
+                        },
+                        "verified": {
+                            "include_in_all": false,
+                            "type": "boolean"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

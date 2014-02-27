@@ -1,0 +1,338 @@
+{
+    "template": "*article*",
+    "order": 100,
+    "mappings": {
+        "activity": {
+            "analyzer": "streams_standard_analyzer",
+            "dynamic": true,
+            "properties": {
+                "status": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "index_options": "docs",
+                    "omit_norms": true,
+                    "type": "string"
+                },
+                "originalUrl": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "index_options": "docs",
+                    "omit_norms": true,
+                    "type": "string"
+                },
+                "wasRedirected": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "index_options": "docs",
+                    "omit_norms": true,
+                    "type": "boolean"
+                },
+                "finalUrl": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "index_options": "docs",
+                    "omit_norms": true,
+                    "type": "string"
+                },
+                "keywords": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "index_options": "docs",
+                    "omit_norms": true,
+                    "type": "string"
+                },
+                "domain": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "index_options": "docs",
+                    "omit_norms": true,
+                    "type": "string"
+                },
+                "finalStatusCode": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "index_options": "docs",
+                    "omit_norms": true,
+                    "type": "string"
+                },
+                "failure": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "index_options": "docs",
+                    "omit_norms": true,
+                    "type": "boolean"
+                },
+                "isTracked": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "index_options": "docs",
+                    "omit_norms": true,
+                    "type": "boolean"
+                },
+                "redirects": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "index_options": "docs",
+                    "omit_norms": true,
+                    "type": "string"
+                },
+                "tookInMillis": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "index_options": "docs",
+                    "omit_norms": true,
+                    "type": "long"
+                },
+                "title": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "index_options": "docs",
+                    "type": "string"
+                },
+                "description": {
+                    "include_in_all": true,
+                    "type": "string"
+                },
+                "body": {
+                    "include_in_all": true,
+                    "type": "string"
+                },
+                "medium": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "index_options": "docs",
+                    "omit_norms": true,
+                    "type": "string"
+                },
+                "author": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "index_options": "docs",
+                    "omit_norms": true,
+                    "type": "string"
+                },
+                "published": {
+                    "include_in_all": false,
+                    "format": "EEE MMM d HH:mm:ss Z yyyy||EEEMMMddHH: mm: ssZyyyy||yyyy/MM/dd HH:mm:ss||yyyy-MM-dd HH:mm:ss||dd-MM-yyyy||yyyy-MM-dd||YYYY-MM-dd'T'HH:mm:ss.SSSZ||EEE, dd MMM yyyy HH:mm:ss Z||YYYY-MM-dd'T'HH:mm:ss.SSSZ||YYYY-MM-dd'T'HH:mm:ssZ||YYYY-MM-dd HH:mm:ss||YYYY-MM-dd'T'HH:mm:ss||YYYYMMdd'T'HH:mm:ss",
+                    "type": "date"
+                },
+                "lastModified": {
+                    "include_in_all": false,
+                    "format": "EEE MMM d HH:mm:ss Z yyyy||EEEMMMddHH: mm: ssZyyyy||yyyy/MM/dd HH:mm:ss||yyyy-MM-dd HH:mm:ss||dd-MM-yyyy||yyyy-MM-dd||YYYY-MM-dd'T'HH:mm:ss.SSSZ||EEE, dd MMM yyyy HH:mm:ss Z||YYYY-MM-dd'T'HH:mm:ss.SSSZ||YYYY-MM-dd'T'HH:mm:ssZ||YYYY-MM-dd HH:mm:ss||YYYY-MM-dd'T'HH:mm:ss||YYYYMMdd'T'HH:mm:ss",
+                    "type": "date"
+                },
+                "imageURL": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "index_options": "docs",
+                    "omit_norms": true,
+                    "type": "string"
+                },
+                "twitterCreator": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "index_options": "docs",
+                    "omit_norms": true,
+                    "type": "string"
+                },
+                "twitterSite": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "index_options": "docs",
+                    "omit_norms": true,
+                    "type": "string"
+                },
+                "facebookApp": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "index_options": "docs",
+                    "omit_norms": true,
+                    "type": "string"
+                },
+                "facebookPage": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "index_options": "docs",
+                    "omit_norms": true,
+                    "type": "string"
+                },
+                "siteStatus": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "index_options": "docs",
+                    "omit_norms": true,
+                    "type": "string"
+                },
+                "metaData": {
+                    "type": "object",
+                    "properties": {
+                        "content-encoding": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "content-type": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "date": {
+                            "type": "date",
+                            "format": "EEE MMM d HH:mm:ss Z yyyy||EEEMMMddHH: mm: ssZyyyy||yyyy/MM/dd HH:mm:ss||yyyy-MM-dd HH:mm:ss||dd-MM-yyyy||yyyy-MM-dd||YYYY-MM-dd'T'HH:mm:ss.SSSZ||EEE, dd MMM yyyy HH:mm:ss Z||YYYY-MM-dd'T'HH:mm:ss.SSSZ||YYYY-MM-dd'T'HH:mm:ssZ||YYYY-MM-dd HH:mm:ss||YYYY-MM-dd'T'HH:mm:ss||YYYYMMdd'T'HH:mm:ss"
+                        },
+                        "pubDate": {
+                            "type": "date",
+                            "format": "EEE MMM d HH:mm:ss Z yyyy||EEEMMMddHH: mm: ssZyyyy||yyyy/MM/dd HH:mm:ss||yyyy-MM-dd HH:mm:ss||dd-MM-yyyy||yyyy-MM-dd||YYYY-MM-dd'T'HH:mm:ss.SSSZ||EEE, dd MMM yyyy HH:mm:ss Z||YYYY-MM-dd'T'HH:mm:ss.SSSZ||YYYY-MM-dd'T'HH:mm:ssZ||YYYY-MM-dd HH:mm:ss||YYYY-MM-dd'T'HH:mm:ss||YYYYMMdd'T'HH:mm:ss"
+                        },
+                        "last-modified": {
+                            "type": "date",
+                            "format": "EEE MMM d HH:mm:ss Z yyyy||EEEMMMddHH: mm: ssZyyyy||yyyy/MM/dd HH:mm:ss||yyyy-MM-dd HH:mm:ss||dd-MM-yyyy||yyyy-MM-dd||YYYY-MM-dd'T'HH:mm:ss.SSSZ||EEE, dd MMM yyyy HH:mm:ss Z||YYYY-MM-dd'T'HH:mm:ss.SSSZ||YYYY-MM-dd'T'HH:mm:ssZ||YYYY-MM-dd HH:mm:ss||YYYY-MM-dd'T'HH:mm:ss||YYYYMMdd'T'HH:mm:ss"
+                        },
+                        "mtvn_date": {
+                            "type": "date",
+                            "format": "EEE MMM d HH:mm:ss Z yyyy||EEEMMMddHH: mm: ssZyyyy||yyyy/MM/dd HH:mm:ss||yyyy-MM-dd HH:mm:ss||dd-MM-yyyy||yyyy-MM-dd||YYYY-MM-dd'T'HH:mm:ss.SSSZ||EEE, dd MMM yyyy HH:mm:ss Z||YYYY-MM-dd'T'HH:mm:ss.SSSZ||YYYY-MM-dd'T'HH:mm:ssZ||YYYY-MM-dd HH:mm:ss||YYYY-MM-dd'T'HH:mm:ss||YYYYMMdd'T'HH:mm:ss"
+                        },
+                        "livedate": {
+                            "type": "date",
+                            "format": "EEE MMM d HH:mm:ss Z yyyy||EEEMMMddHH: mm: ssZyyyy||yyyy/MM/dd HH:mm:ss||yyyy-MM-dd HH:mm:ss||dd-MM-yyyy||yyyy-MM-dd||YYYY-MM-dd'T'HH:mm:ss.SSSZ||EEE, dd MMM yyyy HH:mm:ss Z||YYYY-MM-dd'T'HH:mm:ss.SSSZ||YYYY-MM-dd'T'HH:mm:ssZ||YYYY-MM-dd HH:mm:ss||YYYY-MM-dd'T'HH:mm:ss||YYYYMMdd'T'HH:mm:ss"
+                        },
+                        "revised": {
+                            "type": "date",
+                            "format": "EEE MMM d HH:mm:ss Z yyyy||EEEMMMddHH: mm: ssZyyyy||yyyy/MM/dd HH:mm:ss||yyyy-MM-dd HH:mm:ss||dd-MM-yyyy||yyyy-MM-dd||YYYY-MM-dd'T'HH:mm:ss.SSSZ||EEE, dd MMM yyyy HH:mm:ss Z||YYYY-MM-dd'T'HH:mm:ss.SSSZ||YYYY-MM-dd'T'HH:mm:ssZ||YYYY-MM-dd HH:mm:ss||YYYY-MM-dd'T'HH:mm:ss||YYYYMMdd'T'HH:mm:ss"
+                        },
+                        "dc:title": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "fb:app_id": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "og:image": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "og:site_name": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "og:title": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "og:type": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "title": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "twitter:app:id:googleplay": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "twitter:app:id:iphone": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "twitter:app:name:googleplay": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "twitter:app:name:iphone": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "twitter:app:url:googleplay": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "twitter:app:url:iphone": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "twitter:card": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "twitter:description": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "twitter:image": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "twitter:player:height": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "twitter:player:stream:content_type": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "twitter:player:stream": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "twitter:player:width": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "twitter:player": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "twitter:site": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "twitter:title": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "viewport": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
+                        "sailthru": {
+                            "type": "object",
+                            "properties": {
+                                "date": {
+                                    "type": "date",
+                                    "format": "EEE MMM d HH:mm:ss Z yyyy||EEEMMMddHH: mm: ssZyyyy||yyyy/MM/dd HH:mm:ss||yyyy-MM-dd HH:mm:ss||dd-MM-yyyy||yyyy-MM-dd||YYYY-MM-dd'T'HH:mm:ss.SSSZ||EEE, dd MMM yyyy HH:mm:ss Z||YYYY-MM-dd'T'HH:mm:ss.SSSZ||YYYY-MM-dd'T'HH:mm:ssZ||YYYY-MM-dd HH:mm:ss||YYYY-MM-dd'T'HH:mm:ss||YYYYMMdd'T'HH:mm:ss"
+                                }
+                            }
+                        },
+                        "article": {
+                            "type": "object",
+                            "properties": {
+                                "modified_time": {
+                                    "type": "date",
+                                    "format": "EEE MMM d HH:mm:ss Z yyyy||EEEMMMddHH: mm: ssZyyyy||yyyy/MM/dd HH:mm:ss||yyyy-MM-dd HH:mm:ss||dd-MM-yyyy||yyyy-MM-dd||YYYY-MM-dd'T'HH:mm:ss.SSSZ||EEE, dd MMM yyyy HH:mm:ss Z||YYYY-MM-dd'T'HH:mm:ss.SSSZ||YYYY-MM-dd'T'HH:mm:ssZ||YYYY-MM-dd HH:mm:ss||YYYY-MM-dd'T'HH:mm:ss||YYYYMMdd'T'HH:mm:ss"
+                                }
+                            }
+                        },
+                        "og:article": {
+                            "type": "object",
+                            "properties": {
+                                "published_time": {
+                                    "type": "date",
+                                    "format": "EEE MMM d HH:mm:ss Z yyyy||EEEMMMddHH: mm: ssZyyyy||yyyy/MM/dd HH:mm:ss||yyyy-MM-dd HH:mm:ss||dd-MM-yyyy||yyyy-MM-dd||YYYY-MM-dd'T'HH:mm:ss.SSSZ||EEE, dd MMM yyyy HH:mm:ss Z||YYYY-MM-dd'T'HH:mm:ss.SSSZ||YYYY-MM-dd'T'HH:mm:ssZ||YYYY-MM-dd HH:mm:ss||YYYY-MM-dd'T'HH:mm:ss||YYYYMMdd'T'HH:mm:ss"
+                                }
+                            }
+                        },
+                        "dcterms": {
+                            "type": "object",
+                            "properties": {
+                                "created": {
+                                    "type": "date",
+                                    "format": "EEE MMM d HH:mm:ss Z yyyy||EEEMMMddHH: mm: ssZyyyy||yyyy/MM/dd HH:mm:ss||yyyy-MM-dd HH:mm:ss||dd-MM-yyyy||yyyy-MM-dd||YYYY-MM-dd'T'HH:mm:ss.SSSZ||EEE, dd MMM yyyy HH:mm:ss Z||YYYY-MM-dd'T'HH:mm:ss.SSSZ||YYYY-MM-dd'T'HH:mm:ssZ||YYYY-MM-dd HH:mm:ss||YYYY-MM-dd'T'HH:mm:ss||YYYYMMdd'T'HH:mm:ss"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

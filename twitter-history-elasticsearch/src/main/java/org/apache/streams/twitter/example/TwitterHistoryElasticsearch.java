@@ -1,15 +1,21 @@
 package org.apache.streams.twitter.example;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
 import com.typesafe.config.Config;
 import org.apache.streams.config.StreamsConfigurator;
+import org.apache.streams.core.StreamsDatum;
+import org.apache.streams.core.builders.LocalStreamBuilder;
+import org.apache.streams.core.builders.StreamBuilder;
 import org.apache.streams.elasticsearch.ElasticsearchConfiguration;
 import org.apache.streams.elasticsearch.ElasticsearchConfigurator;
 import org.apache.streams.elasticsearch.ElasticsearchPersistWriter;
+import org.apache.streams.elasticsearch.ElasticsearchWriterConfiguration;
 import org.apache.streams.pojo.json.Activity;
 import org.apache.streams.twitter.TwitterStreamConfiguration;
+import org.apache.streams.twitter.processor.TwitterTypeConverter;
 import org.apache.streams.twitter.provider.TwitterStreamConfigurator;
 import org.apache.streams.twitter.provider.TwitterTimelineProvider;
 import org.slf4j.Logger;
@@ -20,70 +26,36 @@ import java.util.concurrent.*;
 /**
  * Created by sblackmon on 12/10/13.
  */
-public class TwitterHistoryElasticsearch implements Runnable {
+public class TwitterHistoryElasticsearch {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(TwitterHistoryElasticsearch.class);
 
-    ListenableFuture providerTaskComplete;
-    ListenableFuture writerTaskComplete;
-
-    protected ListeningExecutorService executor = MoreExecutors.listeningDecorator(newFixedThreadPoolWithQueueSize(5, 20));
+    private final static ObjectMapper mapper = new ObjectMapper();
 
     public static void main(String[] args)
     {
         LOGGER.info(StreamsConfigurator.config.toString());
 
-        TwitterHistoryElasticsearch twitterHistoryElasticsearch = new TwitterHistoryElasticsearch();
-
-        (new Thread(twitterHistoryElasticsearch)).start();
-        // run until no more data?  TODO: confirm
-    }
-
-    @Override
-    public void run() {
-
         Config twitter = StreamsConfigurator.config.getConfig("twitter");
         Config elasticsearch = StreamsConfigurator.config.getConfig("elasticsearch");
 
         TwitterStreamConfiguration twitterStreamConfiguration = TwitterStreamConfigurator.detectConfiguration(twitter);
-        ElasticsearchConfiguration hdfsConfiguration = ElasticsearchConfigurator.detectConfiguration(elasticsearch);
+        ElasticsearchConfiguration elasticsearchConfiguration = ElasticsearchConfigurator.detectConfiguration(elasticsearch);
+        ElasticsearchWriterConfiguration elasticsearchWriterConfiguration  = mapper.convertValue(elasticsearchConfiguration, ElasticsearchWriterConfiguration.class);
+        elasticsearchWriterConfiguration.setIndex("activitee");
+        elasticsearchWriterConfiguration.setType("activitee");
 
         TwitterTimelineProvider provider = new TwitterTimelineProvider(twitterStreamConfiguration, Activity.class);
-        ElasticsearchPersistWriter writer = new ElasticsearchPersistWriter(hdfsConfiguration, provider.getProviderQueue(), "activity_apache", "activity");
+        TwitterTypeConverter converter = new TwitterTypeConverter(String.class, Activity.class);
+        ElasticsearchPersistWriter writer = new ElasticsearchPersistWriter(elasticsearchWriterConfiguration);
 
-        Thread providerThread = new Thread(provider);
-        Thread writerThread = new Thread(writer);
-        try {
-            providerTaskComplete = executor.submit(providerThread);
-            writerTaskComplete = executor.submit(writerThread);
-        } catch( Exception x ) {
-            LOGGER.info(x.getMessage());
-        }
+        StreamBuilder builder = new LocalStreamBuilder(new LinkedBlockingQueue<StreamsDatum>());
 
-        try {
-            providerTaskComplete.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return;
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-            return;
-        }
+        builder.newReadCurrentStream("provider", provider);
+        builder.addStreamsProcessor("converter", converter, 2, "provider");
+        builder.addStreamsPersistWriter("writer", writer, 2, "converter");
+        builder.start();
 
-        try {
-            writerTaskComplete.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return;
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-            return;
-        }
     }
 
-    private static ExecutorService newFixedThreadPoolWithQueueSize(int nThreads, int queueSize) {
-        return new ThreadPoolExecutor(nThreads, nThreads,
-                5000L, TimeUnit.MILLISECONDS,
-                new ArrayBlockingQueue<Runnable>(queueSize, true), new ThreadPoolExecutor.CallerRunsPolicy());
-    }
 }
