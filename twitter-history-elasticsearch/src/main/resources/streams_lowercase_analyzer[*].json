@@ -1,0 +1,22 @@
+{
+    "template" : "*",
+    "order" : 10,
+    "settings" : {
+        "index": {
+            "analysis": {
+                "analyzer": {
+                    "streams_lowercase_analyzer": {
+                        "char_filter": [
+                            "preserve_tokens"
+                        ],
+                        "filter": [
+                            "lowercase"
+                        ],
+                        "tokenizer": "keyword",
+                        "type": "custom"
+                    }
+                }
+            }
+        }
+    }
+}

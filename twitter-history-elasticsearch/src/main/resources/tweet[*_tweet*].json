@@ -29,7 +29,7 @@
                                 },
                                 "text": {
                                     "include_in_all": false,
-                                    "analyzer": "w2o_lowercase_analyzer",
+                                    "analyzer": "streams_lowercase_analyzer",
                                     "index_options": "docs",
                                     "omit_norms": true,
                                     "type": "string"
@@ -1181,7 +1181,7 @@
                 },
                 "text": {
                     "include_in_all": false,
-                    "analyzer": "w2o_standard_analyzer",
+                    "analyzer": "streams_standard_analyzer",
                     "type": "string",
                     "fielddata": {
                         "filter": {
