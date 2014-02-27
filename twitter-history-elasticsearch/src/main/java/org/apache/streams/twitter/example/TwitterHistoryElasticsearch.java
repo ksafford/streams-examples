@@ -42,8 +42,8 @@ public class TwitterHistoryElasticsearch {
         TwitterStreamConfiguration twitterStreamConfiguration = TwitterStreamConfigurator.detectConfiguration(twitter);
         ElasticsearchConfiguration elasticsearchConfiguration = ElasticsearchConfigurator.detectConfiguration(elasticsearch);
         ElasticsearchWriterConfiguration elasticsearchWriterConfiguration  = mapper.convertValue(elasticsearchConfiguration, ElasticsearchWriterConfiguration.class);
-        elasticsearchWriterConfiguration.setIndex("activitee");
-        elasticsearchWriterConfiguration.setType("activitee");
+        elasticsearchWriterConfiguration.setIndex("apache_activityx");
+        elasticsearchWriterConfiguration.setType("activityx");
 
         TwitterTimelineProvider provider = new TwitterTimelineProvider(twitterStreamConfiguration, Activity.class);
         TwitterTypeConverter converter = new TwitterTypeConverter(String.class, Activity.class);

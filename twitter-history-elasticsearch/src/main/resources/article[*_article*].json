@@ -1,5 +1,5 @@
 {
-    "template": "*article*",
+    "template": "*_article*",
     "order": 100,
     "mappings": {
         "activity": {

@@ -1,9 +1,0 @@
-{
-    "template": "*activity*",
-    "order": 100,
-    "mappings": {
-        "activity": {
-            "dynamic": true
-        }
-    }
-}
