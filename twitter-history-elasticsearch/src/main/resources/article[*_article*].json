@@ -2,7 +2,7 @@
     "template": "*_article*",
     "order": 100,
     "mappings": {
-        "activity": {
+        "article": {
             "analyzer": "streams_standard_analyzer",
             "dynamic": true,
             "properties": {
