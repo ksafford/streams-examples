@@ -3,12 +3,17 @@ package org.apache.streams.twitter.example;
 import com.typesafe.config.Config;
 import org.apache.streams.config.StreamsConfigurator;
 import org.apache.streams.console.ConsolePersistWriter;
+import org.apache.streams.core.StreamsDatum;
+import org.apache.streams.core.builders.LocalStreamBuilder;
+import org.apache.streams.core.builders.StreamBuilder;
 import org.apache.streams.pojo.json.Activity;
 import org.apache.streams.twitter.TwitterStreamConfiguration;
 import org.apache.streams.twitter.provider.TwitterStreamConfigurator;
 import org.apache.streams.twitter.provider.TwitterStreamProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Created by sblackmon on 12/10/13.
@@ -25,16 +30,14 @@ public class TwitterSampleStandalone {
 
         TwitterStreamConfiguration twitterStreamConfiguration = TwitterStreamConfigurator.detectConfiguration(twitter);
 
-        TwitterStreamProvider stream = new TwitterStreamProvider(twitterStreamConfiguration, Activity.class);
-        ConsolePersistWriter console = new ConsolePersistWriter(stream.getProviderQueue());
+        StreamBuilder builder = new LocalStreamBuilder(new LinkedBlockingQueue<StreamsDatum>());
 
-        try {
-            stream.start();
-            console.start();
-        } catch( Exception x ) {
-            LOGGER.info(x.getMessage());
-        }
+        TwitterStreamProvider stream = new TwitterStreamProvider(twitterStreamConfiguration, String.class);
+        ConsolePersistWriter console = new ConsolePersistWriter();
 
-        // run until user exits
+        builder.newReadCurrentStream("stream", stream);
+        builder.addStreamsPersistWriter("console", console, 1);
+        builder.start();
+
     }
 }
