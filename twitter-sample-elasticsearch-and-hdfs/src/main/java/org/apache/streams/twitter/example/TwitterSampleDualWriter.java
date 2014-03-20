@@ -68,7 +68,7 @@ public class TwitterSampleDualWriter implements Runnable {
         hdfsWriterConfiguration.setWriterPath(TwitterTimelineProvider.STREAMS_ID);
         hdfsWriterConfiguration.setWriterFilePrefix("data");
 
-        WebHdfsPersistWriter hdfsWriter = new WebHdfsPersistWriter(hdfsConfiguration);
+        WebHdfsPersistWriter hdfsWriter = new WebHdfsPersistWriter(hdfsWriterConfiguration);
 
         ElasticsearchWriterConfiguration elasticsearchWriterConfiguration  = mapper.convertValue(elasticsearchConfiguration, ElasticsearchWriterConfiguration.class);
         elasticsearchWriterConfiguration.setIndex("activity_tweet_timeline");

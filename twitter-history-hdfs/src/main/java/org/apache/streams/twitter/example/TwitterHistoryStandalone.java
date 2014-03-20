@@ -46,7 +46,7 @@ public class TwitterHistoryStandalone {
         StreamBuilder builder = new LocalStreamBuilder(new LinkedBlockingQueue<StreamsDatum>());
 
         TwitterTimelineProvider provider = new TwitterTimelineProvider(twitterStreamConfiguration, Activity.class);
-        WebHdfsPersistWriter writer = new WebHdfsPersistWriter(hdfsConfiguration);
+        WebHdfsPersistWriter writer = new WebHdfsPersistWriter(hdfsWriterConfiguration);
 
         builder.newReadCurrentStream("provider", provider);
         builder.addStreamsPersistWriter("writer", writer, 1, "provider");

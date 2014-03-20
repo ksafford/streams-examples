@@ -50,19 +50,24 @@
           <url>http://clojars.org/repo</url>
         </repository>
         <repository>
+            <id>cloudera</id>
+            <url>https://repository.cloudera.com/artifactory/repo</url>
+        </repository>
+        <repository>
             <id>maven.twttr.com</id>
             <url>http://maven.twttr.com/</url>
         </repository>
-
     </repositories>
 
     <modules>
+        <module>elasticsearch-backup</module>
         <module>elasticsearch-reindex</module>
+        <module>elasticsearch-restore</module>
         <module>twitter-sample-standalone</module>
         <module>twitter-history-hdfs</module>
         <module>twitter-history-elasticsearch</module>
         <module>twitter-sample-elasticsearch-and-hdfs</module>
-        <module>moreover-metabase-storm</module>
+        <module>moreover-metabase-hdfs</module>
     </modules>
 
     <packaging>pom</packaging>

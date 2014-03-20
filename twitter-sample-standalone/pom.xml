@@ -15,7 +15,7 @@
         <dependency>
             <groupId>com.typesafe</groupId>
             <artifactId>config</artifactId>
-            <version>1.0.2</version>
+            <version>1.2.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.streams</groupId>
@@ -68,7 +68,7 @@
                                         implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>org.apache.streams.twitter.example.MoreoverMetabaseTopology</mainClass>
+                                    <mainClass>org.apache.streams.moreover.example.MoreoverMetabaseHdfs</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

@@ -1,14 +1,15 @@
 package org.apache.streams.elasticsearch.example;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
 import com.typesafe.config.Config;
 import org.apache.streams.config.StreamsConfigurator;
-import org.apache.streams.elasticsearch.ElasticsearchConfiguration;
-import org.apache.streams.elasticsearch.ElasticsearchConfigurator;
-import org.apache.streams.elasticsearch.ElasticsearchPersistReader;
-import org.apache.streams.elasticsearch.ElasticsearchPersistWriter;
+import org.apache.streams.core.StreamsDatum;
+import org.apache.streams.core.builders.LocalStreamBuilder;
+import org.apache.streams.core.builders.StreamBuilder;
+import org.apache.streams.elasticsearch.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,19 +18,15 @@ import java.util.concurrent.*;
 /**
  * Created by sblackmon on 12/10/13.
  */
-public class ElasticsearchReindex implements Runnable {
+public class ElasticsearchReindex {
+
+    public final static String STREAMS_ID = "ElasticsearchReindex";
 
     private final static Logger LOGGER = LoggerFactory.getLogger(ElasticsearchReindex.class);
 
-    private String[] sourceindices;
-    private String[] sourcetypes;
-    private String destinationindex;
-    private String destinationtype;
+    private final static ObjectMapper mapper = new ObjectMapper();
 
     protected ListeningExecutorService executor = MoreExecutors.listeningDecorator(newFixedThreadPoolWithQueueSize(5, 20));
-
-    ListenableFuture providerTaskComplete;
-    ListenableFuture writerTaskComplete;
 
     private static ExecutorService newFixedThreadPoolWithQueueSize(int nThreads, int queueSize) {
         return new ThreadPoolExecutor(nThreads, nThreads,
@@ -41,86 +38,31 @@ public class ElasticsearchReindex implements Runnable {
     {
         LOGGER.info(StreamsConfigurator.config.toString());
 
-        ElasticsearchReindex elasticsearchReindex = new ElasticsearchReindex();
-
-        (new Thread(elasticsearchReindex)).start();
-
-    }
-
-    @Override
-    public void run() {
-
-        Config elasticsearch = StreamsConfigurator.config.getConfig("elasticsearch");
-
-        ElasticsearchConfiguration elasticsearchConfiguration = ElasticsearchConfigurator.detectConfiguration(elasticsearch);
-
-        this.detectConfiguration();
-
-        ElasticsearchPersistReader elasticsearchPersistReader = new ElasticsearchPersistReader(elasticsearchConfiguration, sourceindices, sourcetypes);
-        ElasticsearchPersistWriter elasticsearchPersistWriter = new ElasticsearchPersistWriter(elasticsearchConfiguration, elasticsearchPersistReader.getPersistQueue(), destinationindex, destinationtype);
-
-        try {
-            providerTaskComplete = executor.submit(elasticsearchPersistReader);
-            writerTaskComplete = executor.submit(elasticsearchPersistWriter);
-        } catch( Exception x ) {
-            LOGGER.info(x.getMessage());
-        }
-
-        try {
-            providerTaskComplete.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return;
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-            return;
-        }
-
-        try {
-            writerTaskComplete.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return;
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-            return;
-        }
-
-    }
-
-    private void detectConfiguration() {
-
-        Config elasticsearch = StreamsConfigurator.config.getConfig("elasticsearch");
-
-        Config reindex = elasticsearch.getConfig("reindex");
+        Config reindex = StreamsConfigurator.config.getConfig("reindex");
 
         Config source = reindex.getConfig("source");
-
-        sourceindices = source.getStringList("indices").toArray(new String[0]);
-        sourcetypes = source.getStringList("types").toArray(new String[0]);;
-
         Config destination = reindex.getConfig("destination");
 
-        destinationindex = destination.getString("index");
-        destinationtype = destination.getString("type");
+        ElasticsearchConfiguration elasticsearchSourceConfiguration = ElasticsearchConfigurator.detectConfiguration(source);
+        ElasticsearchConfiguration elasticsearchDestinationConfiguration = ElasticsearchConfigurator.detectConfiguration(destination);
+
+        ElasticsearchReaderConfiguration elasticsearchReaderConfiguration  = mapper.convertValue(elasticsearchSourceConfiguration, ElasticsearchReaderConfiguration.class);
+        elasticsearchReaderConfiguration.setIndex(source.getString("index"));
+        elasticsearchReaderConfiguration.setType(source.getString("type"));
+        ElasticsearchPersistReader elasticsearchPersistReader = new ElasticsearchPersistReader(elasticsearchReaderConfiguration);
+
+        ElasticsearchWriterConfiguration elasticsearchWriterConfiguration  = mapper.convertValue(elasticsearchDestinationConfiguration, ElasticsearchWriterConfiguration.class);
+        elasticsearchWriterConfiguration.setIndex(destination.getString("index"));
+        elasticsearchWriterConfiguration.setType(destination.getString("type"));
+
+        ElasticsearchPersistWriter elasticsearchPersistWriter = new ElasticsearchPersistWriter(elasticsearchWriterConfiguration);
+
+        StreamBuilder builder = new LocalStreamBuilder(new LinkedBlockingQueue<StreamsDatum>(1000));
+
+        builder.newPerpetualStream(ElasticsearchPersistReader.STREAMS_ID, elasticsearchPersistReader);
+        builder.addStreamsPersistWriter(ElasticsearchPersistWriter.STREAMS_ID, elasticsearchPersistWriter, 1, ElasticsearchPersistReader.STREAMS_ID);
+        builder.start();
 
     }
 
-    void shutdownAndAwaitTermination(ExecutorService pool) {
-        pool.shutdown(); // Disable new tasks from being submitted
-        try {
-            // Wait a while for existing tasks to terminate
-            if (!pool.awaitTermination(10, TimeUnit.SECONDS)) {
-                pool.shutdownNow(); // Cancel currently executing tasks
-                // Wait a while for tasks to respond to being cancelled
-                if (!pool.awaitTermination(10, TimeUnit.SECONDS))
-                    System.err.println("Pool did not terminate");
-            }
-        } catch (InterruptedException ie) {
-            // (Re-)Cancel if current thread also interrupted
-            pool.shutdownNow();
-            // Preserve interrupt status
-            Thread.currentThread().interrupt();
-        }
-    }
 }
