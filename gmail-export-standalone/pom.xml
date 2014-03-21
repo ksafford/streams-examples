@@ -4,12 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>org.apache.streams</groupId>
-        <artifactId>streams-examples</artifactId>
+        <artifactId>streams-prototypes</artifactId>
         <version>0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>moreover-metabase-storm</artifactId>
+    <name>gmail-export-standalone</name>
+
+    <artifactId>gmail-export-standalone</artifactId>
 
     <dependencies>
         <dependency>
@@ -24,27 +26,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.streams</groupId>
-            <artifactId>streams-storm</artifactId>
-            <version>0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>storm</groupId>
-            <artifactId>storm-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-collections4</artifactId>
-            <version>4.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.streams</groupId>
-            <artifactId>streams-provider-moreover</artifactId>
-            <version>0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.streams</groupId>
-            <artifactId>streams-persist-kafka</artifactId>
+            <artifactId>google-gmail</artifactId>
             <version>0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -88,7 +70,7 @@
                                         implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>org.apache.streams.moreover.example.MoreoverMetabaseHdfs</mainClass>
+                                    <mainClass>org.apache.streams.twitter.example.MoreoverMetabaseTopology</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
