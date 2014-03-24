@@ -7,8 +7,13 @@ import com.googlecode.gmail4j.GmailMessage;
 import com.typesafe.config.Config;
 import org.apache.streams.config.StreamsConfigurator;
 import org.apache.streams.console.ConsolePersistWriter;
+import org.apache.streams.core.StreamBuilder;
+import org.apache.streams.core.StreamsDatum;
+import org.apache.streams.local.builders.LocalStreamBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Created by sblackmon on 12/10/13.
@@ -26,14 +31,13 @@ public class GMailExportStandalone {
         GMailConfiguration gmailConfiguration = GMailConfigurator.detectConfiguration(gmail);
 
         GMailProvider stream = new GMailProvider(gmailConfiguration, GmailMessage.class);
-        ConsolePersistWriter console = new ConsolePersistWriter(stream.getProviderQueue());
+        ConsolePersistWriter console = new ConsolePersistWriter();
 
-        try {
-            stream.start();
-            console.start();
-        } catch( Exception x ) {
-            LOGGER.info(x.getMessage());
-        }
+        StreamBuilder builder = new LocalStreamBuilder(new LinkedBlockingQueue<StreamsDatum>(10000));
+
+        builder.newPerpetualStream("gmail", stream);
+        builder.addStreamsPersistWriter("console", console, 1, "gmail");
+        builder.start();
 
         // run until user exits
     }

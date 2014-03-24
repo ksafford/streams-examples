@@ -3,15 +3,18 @@ package org.apache.streams.twitter.example;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.typesafe.config.Config;
 import org.apache.streams.config.StreamsConfigurator;
+import org.apache.streams.core.StreamBuilder;
+import org.apache.streams.core.StreamsDatum;
+import org.apache.streams.local.builders.LocalStreamBuilder;
 import org.apache.streams.mongo.MongoPersistWriter;
 import org.apache.streams.twitter.TwitterStreamConfiguration;
-import org.apache.streams.twitter.provider.TwitterProfileProcessor;
+import org.apache.streams.twitter.processor.TwitterProfileProcessor;
 import org.apache.streams.twitter.provider.TwitterStreamConfigurator;
 import org.apache.streams.twitter.provider.TwitterStreamProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Random;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Created by sblackmon on 12/10/13.
@@ -30,28 +33,14 @@ public class TwitterProfilesMongo {
         TwitterStreamConfiguration twitterStreamConfiguration = TwitterStreamConfigurator.detectConfiguration(twitter);
 
         TwitterStreamProvider provider = new TwitterStreamProvider(twitterStreamConfiguration, ObjectNode.class);
-        TwitterProfileProcessor profile = new TwitterProfileProcessor(provider.getProviderQueue());
-        MongoPersistWriter writer = new MongoPersistWriter(profile.getProcessorOutputQueue());
+        TwitterProfileProcessor profile = new TwitterProfileProcessor();
+        MongoPersistWriter writer = new MongoPersistWriter();
 
-        Thread providerThread = new Thread(provider);
-        Thread profileThread = new Thread(profile);
-        Thread writerThread = new Thread(writer);
-        try {
-            profileThread.start();
-            writerThread.start();
-            providerThread.start();
-        } catch( Exception x ) {
-            x.printStackTrace();
-            LOGGER.error(x.getMessage());
-        }
+        StreamBuilder builder = new LocalStreamBuilder(new LinkedBlockingQueue<StreamsDatum>(100));
 
-        while( providerThread.isAlive() ) {
-            try {
-                Thread.sleep(new Random().nextInt(100));
-            } catch (InterruptedException e) { }
-        }
-        profileThread.stop();
-        writerThread.stop();
-        // run until user exits
+        builder.newPerpetualStream(TwitterStreamProvider.STREAMS_ID , provider);
+        builder.addStreamsProcessor("profile", profile, 1, TwitterStreamProvider.STREAMS_ID);
+        builder.addStreamsPersistWriter("mongo", writer, 1, "profile");
+        builder.start();
     }
 }
