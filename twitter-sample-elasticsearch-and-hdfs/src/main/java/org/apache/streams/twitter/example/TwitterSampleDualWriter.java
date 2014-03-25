@@ -2,11 +2,8 @@ package org.apache.streams.twitter.example;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.typesafe.config.Config;
-import org.apache.hadoop.fs.Path;
 import org.apache.streams.config.StreamsConfigurator;
 import org.apache.streams.core.StreamsDatum;
-import org.apache.streams.core.builders.LocalStreamBuilder;
-import org.apache.streams.core.builders.StreamBuilder;
 import org.apache.streams.elasticsearch.ElasticsearchConfiguration;
 import org.apache.streams.elasticsearch.ElasticsearchConfigurator;
 import org.apache.streams.elasticsearch.ElasticsearchPersistWriter;
@@ -15,10 +12,8 @@ import org.apache.streams.hdfs.HdfsConfiguration;
 import org.apache.streams.hdfs.HdfsConfigurator;
 import org.apache.streams.hdfs.HdfsWriterConfiguration;
 import org.apache.streams.hdfs.WebHdfsPersistWriter;
-import org.apache.streams.kafka.KafkaConfiguration;
-import org.apache.streams.kafka.KafkaConfigurator;
-import org.apache.streams.kafka.KafkaPersistReader;
-import org.apache.streams.kafka.KafkaPersistWriter;
+import org.apache.streams.local.builders.LocalStreamBuilder;
+import org.apache.streams.core.StreamBuilder;
 import org.apache.streams.pojo.json.Activity;
 import org.apache.streams.twitter.TwitterStreamConfiguration;
 import org.apache.streams.twitter.provider.TwitterStreamConfigurator;
@@ -27,7 +22,6 @@ import org.apache.streams.twitter.provider.TwitterTimelineProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Random;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**

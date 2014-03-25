@@ -1,23 +1,22 @@
 package org.apache.streams.elasticsearch.example;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.util.concurrent.ListenableFuture;
-import com.google.common.util.concurrent.ListeningExecutorService;
-import com.google.common.util.concurrent.MoreExecutors;
 import com.typesafe.config.Config;
 import org.apache.streams.config.StreamsConfigurator;
 import org.apache.streams.core.StreamsDatum;
-import org.apache.streams.core.builders.LocalStreamBuilder;
-import org.apache.streams.core.builders.StreamBuilder;
-import org.apache.streams.elasticsearch.*;
-import org.apache.streams.hdfs.HdfsConfiguration;
+import org.apache.streams.elasticsearch.ElasticsearchConfiguration;
+import org.apache.streams.elasticsearch.ElasticsearchConfigurator;
+import org.apache.streams.elasticsearch.ElasticsearchPersistWriter;
+import org.apache.streams.elasticsearch.ElasticsearchWriterConfiguration;
 import org.apache.streams.hdfs.HdfsConfigurator;
 import org.apache.streams.hdfs.HdfsReaderConfiguration;
 import org.apache.streams.hdfs.WebHdfsPersistReader;
+import org.apache.streams.local.builders.LocalStreamBuilder;
+import org.apache.streams.core.StreamBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.*;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Created by sblackmon on 12/10/13.
@@ -38,10 +37,8 @@ public class ElasticsearchRestore {
         detectConfiguration();
 
         Config hdfs = StreamsConfigurator.config.getConfig("hdfs");
-        HdfsConfiguration hdfsConfiguration = HdfsConfigurator.detectConfiguration(hdfs);
 
-        HdfsReaderConfiguration hdfsReaderConfiguration  = mapper.convertValue(hdfsConfiguration, HdfsReaderConfiguration.class);
-        hdfsReaderConfiguration.setReaderPath(index + "/twitter/statusdedup");
+        HdfsReaderConfiguration hdfsReaderConfiguration  = HdfsConfigurator.detectReaderConfiguration(hdfs);
 
         WebHdfsPersistReader hdfsReader = new WebHdfsPersistReader(hdfsReaderConfiguration);
 
@@ -53,7 +50,7 @@ public class ElasticsearchRestore {
 
         ElasticsearchPersistWriter elasticsearchWriter = new ElasticsearchPersistWriter(elasticsearchWriterConfiguration);
 
-        StreamBuilder builder = new LocalStreamBuilder(new ConcurrentLinkedQueue<StreamsDatum>());
+        StreamBuilder builder = new LocalStreamBuilder(new LinkedBlockingQueue<StreamsDatum>(10000));
 
         builder.newPerpetualStream(WebHdfsPersistReader.STREAMS_ID, hdfsReader);
         builder.addStreamsPersistWriter(ElasticsearchPersistWriter.STREAMS_ID, elasticsearchWriter, 1, WebHdfsPersistReader.STREAMS_ID);

@@ -25,12 +25,12 @@
     <parent>
         <groupId>org.apache.streams</groupId>
         <artifactId>streams-project</artifactId>
-        <version>0.1.SNAPSHOT</version>
+        <version>0.1-SNAPSHOT</version>
     </parent>
 
     <groupId>org.apache.streams</groupId>
     <artifactId>streams-examples</artifactId>
-    <version>0.1.SNAPSHOT</version>
+    <version>0.1-SNAPSHOT</version>
 
     <name>Apache Streams Project</name>
 
@@ -63,12 +63,16 @@
         <module>elasticsearch-backup</module>
         <module>elasticsearch-reindex</module>
         <module>elasticsearch-restore</module>
+        <module>gmail-export-standalone</module>
+        <module>moreover-metabase-hdfs</module>
         <module>hdfs-converttoactivity</module>
         <module>twitter-sample-standalone</module>
         <module>twitter-history-hdfs</module>
         <module>twitter-history-elasticsearch</module>
+        <module>twitter-profiles-hbase</module>
+        <module>twitter-profiles-mongo</module>
+        <module>twitter-sample-standalone</module>
         <module>twitter-sample-elasticsearch-and-hdfs</module>
-        <module>moreover-metabase-hdfs</module>
     </modules>
 
     <packaging>pom</packaging>

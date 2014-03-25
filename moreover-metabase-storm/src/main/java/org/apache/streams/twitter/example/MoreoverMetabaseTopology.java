@@ -4,42 +4,20 @@ import backtype.storm.LocalCluster;
 import backtype.storm.StormSubmitter;
 import backtype.storm.generated.AlreadyAliveException;
 import backtype.storm.generated.InvalidTopologyException;
-import backtype.storm.task.IMetricsContext;
-import backtype.storm.task.TopologyContext;
-import backtype.storm.tuple.Fields;
 import backtype.storm.utils.Utils;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.typesafe.config.Config;
-import org.apache.commons.collections4.IteratorUtils;
 import org.apache.streams.config.StreamsConfigurator;
-import org.apache.streams.console.ConsolePersistWriter;
-import org.apache.streams.core.StreamsDatum;
 import org.apache.streams.data.moreover.MoreoverConfigurator;
 import org.apache.streams.data.moreover.MoreoverProvider;
 import org.apache.streams.kafka.KafkaConfiguration;
 import org.apache.streams.kafka.KafkaConfigurator;
 import org.apache.streams.kafka.KafkaPersistWriter;
 import org.apache.streams.moreover.MoreoverConfiguration;
-import org.apache.streams.pojo.json.Activity;
 import org.apache.streams.storm.trident.StreamsPersistWriterState;
 import org.apache.streams.storm.trident.StreamsProviderSpout;
 import org.apache.streams.storm.trident.StreamsTopology;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import storm.trident.operation.TridentCollector;
-import storm.trident.spout.IBatchSpout;
-import storm.trident.state.BaseStateUpdater;
-import storm.trident.state.State;
-import storm.trident.state.StateFactory;
-import storm.trident.tuple.TridentTuple;
-
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Created by sblackmon on 12/10/13.

@@ -3,15 +3,18 @@ package org.apache.streams.twitter.example;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.typesafe.config.Config;
 import org.apache.streams.config.StreamsConfigurator;
+import org.apache.streams.core.StreamBuilder;
+import org.apache.streams.core.StreamsDatum;
 import org.apache.streams.hbase.HbasePersistWriter;
+import org.apache.streams.local.builders.LocalStreamBuilder;
 import org.apache.streams.twitter.TwitterStreamConfiguration;
-import org.apache.streams.twitter.provider.TwitterProfileProcessor;
+import org.apache.streams.twitter.processor.TwitterProfileProcessor;
 import org.apache.streams.twitter.provider.TwitterStreamConfigurator;
 import org.apache.streams.twitter.provider.TwitterStreamProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Random;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Created by sblackmon on 12/10/13.
@@ -29,27 +32,14 @@ public class TwitterProfilesHbase {
         TwitterStreamConfiguration twitterStreamConfiguration = TwitterStreamConfigurator.detectConfiguration(twitter);
 
         TwitterStreamProvider provider = new TwitterStreamProvider(twitterStreamConfiguration, ObjectNode.class);
-        TwitterProfileProcessor profile = new TwitterProfileProcessor(provider.getProviderQueue());
-        HbasePersistWriter writer = new HbasePersistWriter(profile.getProcessorOutputQueue());
+        TwitterProfileProcessor profile = new TwitterProfileProcessor();
+        HbasePersistWriter writer = new HbasePersistWriter();
 
-        Thread providerThread = new Thread(provider);
-        Thread profileThread = new Thread(profile);
-        Thread writerThread = new Thread(writer);
+        StreamBuilder builder = new LocalStreamBuilder(new LinkedBlockingQueue<StreamsDatum>(100));
 
-        try {
-            profileThread.start();
-            writerThread.start();
-            providerThread.start();
-        } catch( Exception x ) {
-            LOGGER.info(x.getMessage());
-        }
-
-        while( providerThread.isAlive() ) {
-            try {
-                Thread.sleep(new Random().nextInt(100));
-            } catch (InterruptedException e) { }
-        }
-        profileThread.stop();
-        writerThread.stop();
+        builder.newPerpetualStream(TwitterStreamProvider.STREAMS_ID , provider);
+        builder.addStreamsProcessor("profile", profile, 1, TwitterStreamProvider.STREAMS_ID);
+        builder.addStreamsPersistWriter("hbase", writer, 1, "profile");
+        builder.start();
     }
 }

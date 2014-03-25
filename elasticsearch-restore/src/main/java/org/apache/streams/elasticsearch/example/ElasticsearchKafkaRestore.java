@@ -4,8 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.typesafe.config.Config;
 import org.apache.streams.config.StreamsConfigurator;
 import org.apache.streams.core.StreamsDatum;
-import org.apache.streams.core.builders.LocalStreamBuilder;
-import org.apache.streams.core.builders.StreamBuilder;
 import org.apache.streams.elasticsearch.ElasticsearchConfiguration;
 import org.apache.streams.elasticsearch.ElasticsearchConfigurator;
 import org.apache.streams.elasticsearch.ElasticsearchPersistWriter;
@@ -18,6 +16,8 @@ import org.apache.streams.kafka.KafkaConfiguration;
 import org.apache.streams.kafka.KafkaConfigurator;
 import org.apache.streams.kafka.KafkaPersistReader;
 import org.apache.streams.kafka.KafkaPersistWriter;
+import org.apache.streams.local.builders.LocalStreamBuilder;
+import org.apache.streams.core.StreamBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
