@@ -32,9 +32,9 @@
     <artifactId>streams-examples</artifactId>
     <version>0.1-SNAPSHOT</version>
 
-    <name>Apache Streams Project</name>
+    <name>Apache Streams Examples</name>
 
-    <description>Apache Streams Project</description>
+    <description>Apache Streams Examples</description>
 
     <repositories>
         <repository>

@@ -1,15 +1,15 @@
 REGISTER /home/cloudera/Desktop/hdfs-converttoactivity-0.1-SNAPSHOT.jar
 
-DEFINE SERIALIZER org.apache.streams.pig.StreamsSerializerExec('org.apache.streams.twitter.serializer.TwitterJsonTweetActivitySerializer');
+DEFINE SERIALIZER org.apache.streams.pig.StreamsSerializerExec('org.apache.streams.twitter.serializer.TwitterJsonActivitySerializer');
 
-tweet = LOAD 'testtweets/*' USING PigStorage('\t') AS (tweetid: chararray, source: chararray, timestamp: chararray, object: chararray);
+tweets = LOAD 'testtweets/*' USING PigStorage('\t') AS (tweetid: chararray, source: chararray, timestamp: chararray, object: chararray);
 
-activity = FOREACH tweet GENERATE tweetid, source, timestamp, SERIALIZER(object);
+activities = FOREACH tweets GENERATE
+    tweetid AS tweetid,
+    source AS source,
+    timestamp AS timestamp,
+    SERIALIZER(object) AS activity;
 
+result = FILTER activities BY activity IS NOT NULL;
 
-
-STORE activity INTO 'activity';
-
-DUMP activity;
-
-ILLUSTRATE activity;
+STORE result INTO 'activity';
