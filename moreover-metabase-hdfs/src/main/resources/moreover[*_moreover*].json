@@ -140,6 +140,13 @@
                     "properties": {
                         "publishingPlatform": {
                             "properties": {
+                                "userName": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "string"
+                                },
                                 "userId": {
                                     "include_in_all": false,
                                     "index": "not_analyzed",
@@ -152,7 +159,35 @@
                                     "index": "not_analyzed",
                                     "index_options": "docs",
                                     "omit_norms": true,
-                                    "type": "string"
+                                    "type": "long"
+                                },
+                                "statusesCount": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "long"
+                                },
+                                "followingCount": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "long"
+                                },
+                                "followersCount": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "long"
+                                },
+                                "kloutScore": {
+                                    "include_in_all": false,
+                                    "index": "not_analyzed",
+                                    "index_options": "docs",
+                                    "omit_norms": true,
+                                    "type": "long"
                                 }
                             }
                         },
@@ -169,6 +204,20 @@
                             "type": "string"
                         },
                         "name": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "homeUrl": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        },
+                        "email": {
                             "include_in_all": false,
                             "index": "not_analyzed",
                             "index_options": "docs",
@@ -534,6 +583,38 @@
                                             "index": "not_analyzed",
                                             "index_options": "docs",
                                             "omit_norms": true,
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "semantics": {
+                    "properties": {
+                        "entities": {
+                            "properties": {
+                                "entity": {
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "value": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "events": {
+                            "properties": {
+                                "property": {
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "value": {
                                             "type": "string"
                                         }
                                     }
