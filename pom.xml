@@ -67,6 +67,7 @@
         <module>moreover-metabase-hdfs</module>
         <module>hdfs-converttoactivity</module>
         <module>hdfs-urlunwind</module>
+        <module>hdfs-pullarticles</module>
         <module>twitter-history-hdfs</module>
         <module>twitter-history-elasticsearch</module>
         <module>twitter-profiles-hbase</module>
