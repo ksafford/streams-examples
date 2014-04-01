@@ -12,4 +12,4 @@ activities = FOREACH tweets GENERATE
 
 result = FILTER activities BY activity IS NOT NULL;
 
-STORE result INTO 'activity';
+STORE result INTO 'twitter-activity';

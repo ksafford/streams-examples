@@ -28,6 +28,11 @@
         </dependency>
         <dependency>
             <groupId>org.apache.streams</groupId>
+            <artifactId>streams-provider-moreover</artifactId>
+            <version>0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.streams</groupId>
             <artifactId>streams-runtime-pig</artifactId>
             <version>0.1-SNAPSHOT</version>
         </dependency>

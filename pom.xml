@@ -66,12 +66,12 @@
         <module>gmail-export-standalone</module>
         <module>moreover-metabase-hdfs</module>
         <module>hdfs-converttoactivity</module>
-        <module>twitter-sample-standalone</module>
+        <module>hdfs-urlunwind</module>
         <module>twitter-history-hdfs</module>
         <module>twitter-history-elasticsearch</module>
         <module>twitter-profiles-hbase</module>
         <module>twitter-profiles-mongo</module>
-        <module>twitter-sample-standalone</module>
+        <module>twitter-userstream-local</module>
         <module>twitter-sample-elasticsearch-and-hdfs</module>
     </modules>
 
