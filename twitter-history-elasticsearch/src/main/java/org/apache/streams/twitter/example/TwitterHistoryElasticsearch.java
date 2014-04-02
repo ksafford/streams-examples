@@ -12,6 +12,7 @@ import org.apache.streams.local.builders.LocalStreamBuilder;
 import org.apache.streams.core.StreamBuilder;
 import org.apache.streams.pojo.json.Activity;
 import org.apache.streams.twitter.TwitterStreamConfiguration;
+import org.apache.streams.twitter.pojo.Tweet;
 import org.apache.streams.twitter.processor.TwitterTypeConverter;
 import org.apache.streams.twitter.provider.TwitterStreamConfigurator;
 import org.apache.streams.twitter.provider.TwitterTimelineProvider;
@@ -37,13 +38,11 @@ public class TwitterHistoryElasticsearch {
         Config elasticsearch = StreamsConfigurator.config.getConfig("elasticsearch");
 
         TwitterStreamConfiguration twitterStreamConfiguration = TwitterStreamConfigurator.detectConfiguration(twitter);
-        ElasticsearchConfiguration elasticsearchConfiguration = ElasticsearchConfigurator.detectConfiguration(elasticsearch);
+        ElasticsearchConfiguration elasticsearchConfiguration = ElasticsearchConfigurator.detectWriterConfiguration(elasticsearch);
         ElasticsearchWriterConfiguration elasticsearchWriterConfiguration  = mapper.convertValue(elasticsearchConfiguration, ElasticsearchWriterConfiguration.class);
-        elasticsearchWriterConfiguration.setIndex("apache_activityx");
-        elasticsearchWriterConfiguration.setType("activityx");
 
-        TwitterTimelineProvider provider = new TwitterTimelineProvider(twitterStreamConfiguration, Activity.class);
-        TwitterTypeConverter converter = new TwitterTypeConverter(String.class, Activity.class);
+        TwitterTimelineProvider provider = new TwitterTimelineProvider(twitterStreamConfiguration, Tweet.class);
+        TwitterTypeConverter converter = new TwitterTypeConverter(String.class, Tweet.class);
         ElasticsearchPersistWriter writer = new ElasticsearchPersistWriter(elasticsearchWriterConfiguration);
 
         StreamBuilder builder = new LocalStreamBuilder(new LinkedBlockingQueue<StreamsDatum>());

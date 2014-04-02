@@ -35,7 +35,7 @@ public class TwitterUserstreamLocal {
         ConsolePersistWriter console = new ConsolePersistWriter();
 
         builder.newPerpetualStream("stream", stream);
-        builder.addStreamsPersistWriter("console", console, 1);
+        builder.addStreamsPersistWriter("console", console, 1, "stream");
         builder.start();
 
     }

@@ -407,8 +407,9 @@
                             }
                         },
                         "published": {
+                            "format": "EEE MMM d HH:mm:ss Z yyyy||EEEMMMddHH: mm: ssZyyyy||yyyy/MM/dd HH:mm:ss||yyyy-MM-dd HH:mm:ss||dd-MM-yyyy||yyyy-MM-dd||YYYY-MM-dd'T'HH:mm:ss.SSSZ||EEE, dd MMM yyyy HH:mm:ss Z||YYYY-MM-dd'T'HH:mm:ss.SSSZ||YYYY-MM-dd'T'HH:mm:ssZ",
                             "include_in_all": false,
-                            "type": "long"
+                            "type": "date"
                         },
                         "quoteSource": {
                             "include_in_all": false,

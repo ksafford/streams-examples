@@ -1,6 +1,7 @@
 package org.apache.streams.elasticsearch.example;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Lists;
 import com.typesafe.config.Config;
 import org.apache.streams.config.StreamsConfigurator;
 import org.apache.streams.core.StreamBuilder;
@@ -29,13 +30,11 @@ public class ElasticsearchBackup {
     {
         LOGGER.info(StreamsConfigurator.config.toString());
 
-        detectConfiguration();
-
         Config elasticsearch = StreamsConfigurator.config.getConfig("elasticsearch");
         ElasticsearchConfiguration elasticsearchConfiguration = ElasticsearchConfigurator.detectConfiguration(elasticsearch);
         ElasticsearchReaderConfiguration elasticsearchReaderConfiguration  = mapper.convertValue(elasticsearchConfiguration, ElasticsearchReaderConfiguration.class);
-        elasticsearchReaderConfiguration.setIndex(index + "_" + type);
-        elasticsearchReaderConfiguration.setType(type);
+        elasticsearchReaderConfiguration.setIndexes(Lists.newArrayList(index + "_" + type));
+        elasticsearchReaderConfiguration.setTypes(Lists.newArrayList(type));
 
         ElasticsearchPersistReader elasticsearchReader = new ElasticsearchPersistReader(elasticsearchReaderConfiguration);
 
@@ -54,18 +53,5 @@ public class ElasticsearchBackup {
         builder.start();
 
     }
-
-    private static void detectConfiguration() {
-
-        Config elasticsearch = StreamsConfigurator.config.getConfig("elasticsearch");
-
-        Config restore = elasticsearch.getConfig("backup");
-
-        index = restore.getString("index");
-
-        type = restore.getString("type");
-
-    }
-
 
 }

@@ -7,11 +7,12 @@
                 "analyzer": {
                     "streams_standard_analyzer": {
                         "char_filter": [
-                            "html_strip",
-                            "preserve_tokens"
+                            "html_strip"
                         ],
                         "filter": [
                             "pattern_number",
+                            "pattern_http_url",
+                            "pattern_www_url",
                             "lowercase",
                             "stop_filter_english",
                             "length_filter_3_25"

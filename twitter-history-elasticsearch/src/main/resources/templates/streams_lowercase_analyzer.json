@@ -7,7 +7,7 @@
                 "analyzer": {
                     "streams_lowercase_analyzer": {
                         "char_filter": [
-                            "preserve_tokens"
+                            "html_strip"
                         ],
                         "filter": [
                             "lowercase"

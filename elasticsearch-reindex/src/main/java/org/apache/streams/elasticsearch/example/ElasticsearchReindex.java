@@ -46,13 +46,9 @@ public class ElasticsearchReindex {
         ElasticsearchConfiguration elasticsearchDestinationConfiguration = ElasticsearchConfigurator.detectConfiguration(destination);
 
         ElasticsearchReaderConfiguration elasticsearchReaderConfiguration  = mapper.convertValue(elasticsearchSourceConfiguration, ElasticsearchReaderConfiguration.class);
-        elasticsearchReaderConfiguration.setIndex(source.getString("index"));
-        elasticsearchReaderConfiguration.setType(source.getString("type"));
         ElasticsearchPersistReader elasticsearchPersistReader = new ElasticsearchPersistReader(elasticsearchReaderConfiguration);
 
         ElasticsearchWriterConfiguration elasticsearchWriterConfiguration  = mapper.convertValue(elasticsearchDestinationConfiguration, ElasticsearchWriterConfiguration.class);
-        elasticsearchWriterConfiguration.setIndex(destination.getString("index"));
-        elasticsearchWriterConfiguration.setType(destination.getString("type"));
 
         ElasticsearchPersistWriter elasticsearchPersistWriter = new ElasticsearchPersistWriter(elasticsearchWriterConfiguration);
 
