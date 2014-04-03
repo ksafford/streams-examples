@@ -112,7 +112,7 @@
                         ]
                     },
                     "title": "",
-                    "field": "additionalProperties.extensions.twitter.additionalProperties.place.country_code"
+                    "field": "extensions.twitter.place.country_code"
                 },
                 {
                     "error": false,
@@ -137,7 +137,7 @@
                             3
                         ]
                     },
-                    "field": "additionalProperties.extensions.twitter.additionalProperties.place.country_code"
+                    "field": "extensions.twitter.place.country_code"
                 },
                 {
                     "error": false,
@@ -145,7 +145,7 @@
                     "editable": true,
                     "type": "bettermap",
                     "loadingEditor": false,
-                    "field": "additionalProperties.extensions.location.coordinates.additionalProperties.coordinates",
+                    "field": "extensions.location.coordinates.coordinates",
                     "size": 1000,
                     "spyable": true,
                     "tooltip": "_id",
@@ -175,7 +175,7 @@
                     "editable": true,
                     "type": "terms",
                     "loadingEditor": false,
-                    "field": "additionalProperties.extensions.twitter.entities.hashtags.text",
+                    "field": "extensions.twitter.entities.hashtags.text",
                     "exclude": [],
                     "missing": true,
                     "other": true,
@@ -211,11 +211,11 @@
                     "editable": true,
                     "type": "terms",
                     "loadingEditor": false,
-                    "field": "text",
+                    "field": "content",
                     "exclude": [],
                     "missing": true,
                     "other": true,
-                    "size": 100,
+                    "size": 10,
                     "order": "count",
                     "style": {
                         "font-size": "10pt"
@@ -247,7 +247,7 @@
                     "editable": true,
                     "type": "terms",
                     "loadingEditor": false,
-                    "field": "additionalProperties.extensions.twitter.entities.user_mentions.screen_name",
+                    "field": "extensions.twitter.entities.user_mentions.screen_name",
                     "exclude": [],
                     "missing": true,
                     "other": true,
@@ -424,7 +424,7 @@
                             3
                         ]
                     },
-                    "field": "content",
+                    "field": "text",
                     "exclude": [],
                     "missing": true,
                     "other": true,

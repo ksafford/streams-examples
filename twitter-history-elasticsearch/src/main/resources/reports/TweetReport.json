@@ -77,7 +77,7 @@
     "index": {
         "interval": "none",
         "pattern": "userhistory_tweet",
-        "default": "steveblackmon_tweet",
+        "default": "userhistory_tweet",
         "warm_fields": true
     },
     "rows": [
@@ -120,10 +120,10 @@
                     "editable": true,
                     "type": "bettermap",
                     "loadingEditor": false,
-                    "field": "tweet.coordinates.coordinates",
+                    "field": "coordinates.coordinates",
                     "size": 1000,
                     "spyable": true,
-                    "tooltip": "_id",
+                    "tooltip": "place.full_name",
                     "queries": {
                         "mode": "all",
                         "ids": [
@@ -157,7 +157,7 @@
                             3
                         ]
                     },
-                    "field": "tweet.place.country_code"
+                    "field": "place.country_code"
                 }
             ],
             "notice": true
