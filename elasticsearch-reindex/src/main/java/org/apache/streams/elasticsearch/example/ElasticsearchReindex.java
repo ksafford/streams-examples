@@ -42,15 +42,13 @@ public class ElasticsearchReindex {
         Config source = reindex.getConfig("source");
         Config destination = reindex.getConfig("destination");
 
-        ElasticsearchConfiguration elasticsearchSourceConfiguration = ElasticsearchConfigurator.detectConfiguration(source);
-        ElasticsearchConfiguration elasticsearchDestinationConfiguration = ElasticsearchConfigurator.detectConfiguration(destination);
+        ElasticsearchReaderConfiguration elasticsearchSourceConfiguration = ElasticsearchConfigurator.detectReaderConfiguration(source);
 
-        ElasticsearchReaderConfiguration elasticsearchReaderConfiguration  = mapper.convertValue(elasticsearchSourceConfiguration, ElasticsearchReaderConfiguration.class);
-        ElasticsearchPersistReader elasticsearchPersistReader = new ElasticsearchPersistReader(elasticsearchReaderConfiguration);
+        ElasticsearchPersistReader elasticsearchPersistReader = new ElasticsearchPersistReader(elasticsearchSourceConfiguration);
 
-        ElasticsearchWriterConfiguration elasticsearchWriterConfiguration  = mapper.convertValue(elasticsearchDestinationConfiguration, ElasticsearchWriterConfiguration.class);
+        ElasticsearchWriterConfiguration elasticsearchDestinationConfiguration = ElasticsearchConfigurator.detectWriterConfiguration(destination);
 
-        ElasticsearchPersistWriter elasticsearchPersistWriter = new ElasticsearchPersistWriter(elasticsearchWriterConfiguration);
+        ElasticsearchPersistWriter elasticsearchPersistWriter = new ElasticsearchPersistWriter(elasticsearchDestinationConfiguration);
 
         StreamBuilder builder = new LocalStreamBuilder(new LinkedBlockingQueue<StreamsDatum>(1000));
 
