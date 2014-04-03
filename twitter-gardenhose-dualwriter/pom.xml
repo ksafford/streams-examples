@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>twitter-history-elasticsearch-and-hdfs</artifactId>
+    <artifactId>twitter-gardenhost-dualwriter</artifactId>
 
     <dependencies>
         <dependency>

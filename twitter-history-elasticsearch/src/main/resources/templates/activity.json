@@ -22,13 +22,18 @@
                     "type": "object"
                 },
                 "content": {
-                    "fielddata": {
-                        "filter.frequency.max": "0.99",
-                        "filter.frequency.min": "1.0E-4",
-                        "filter.frequency.min_segment_size": "500"
-                    },
                     "include_in_all": true,
-                    "type": "string"
+                    "analyzer": "streams_standard_analyzer",
+                    "type": "string",
+                    "fielddata": {
+                        "filter": {
+                            "frequency": {
+                                "min": 0.00001,
+                                "max": 0.99,
+                                "min_segment_size": 500
+                            }
+                        }
+                    }
                 },
                 "generator": {
                     "dynamic": true,
@@ -136,7 +141,7 @@
                             "properties": {
                                 "coordinates": {
                                     "include_in_all": false,
-                                    "type": "double"
+                                    "type": "geo_point"
                                 },
                                 "type": {
                                     "include_in_all": false,
@@ -272,7 +277,7 @@
                                     "properties": {
                                         "coordinates": {
                                             "include_in_all": false,
-                                            "type": "double"
+                                            "type": "geo_point"
                                         },
                                         "type": {
                                             "include_in_all": false,
