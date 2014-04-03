@@ -11,8 +11,11 @@
             },
             "properties": {
                 "coordinates": {
-                    "include_in_all": false,
-                    "type": "geo_point"
+                    "properties": {
+                        "coordinates": {
+                            "type": "geo_point"
+                        }
+                    }
                 },
                 "created_at": {
                     "include_in_all": false,
@@ -885,10 +888,17 @@
                         },
                         "text": {
                             "include_in_all": true,
-                            "index": "not_analyzed",
-                            "index_options": "docs",
-                            "omit_norms": true,
-                            "type": "string"
+                            "analyzer": "streams_standard_analyzer",
+                            "type": "string",
+                            "fielddata": {
+                                "filter": {
+                                    "frequency": {
+                                        "min": 0.00001,
+                                        "max": 0.99,
+                                        "min_segment_size": 500
+                                    }
+                                }
+                            }
                         },
                         "truncated": {
                             "include_in_all": false,
