@@ -70,7 +70,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.streams</groupId>
-            <artifactId>streams-processor-urls</artifactId>
+            <artifactId>streams-processor-tika</artifactId>
             <version>0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
