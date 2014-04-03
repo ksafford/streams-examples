@@ -37,8 +37,7 @@ public class TwitterHistoryElasticsearchActivity {
         Config elasticsearch = StreamsConfigurator.config.getConfig("elasticsearch");
 
         TwitterStreamConfiguration twitterStreamConfiguration = TwitterStreamConfigurator.detectConfiguration(twitter);
-        ElasticsearchConfiguration elasticsearchConfiguration = ElasticsearchConfigurator.detectWriterConfiguration(elasticsearch);
-        ElasticsearchWriterConfiguration elasticsearchWriterConfiguration  = mapper.convertValue(elasticsearchConfiguration, ElasticsearchWriterConfiguration.class);
+        ElasticsearchWriterConfiguration elasticsearchWriterConfiguration = ElasticsearchConfigurator.detectWriterConfiguration(elasticsearch);
 
         TwitterTimelineProvider provider = new TwitterTimelineProvider(twitterStreamConfiguration, String.class);
         TwitterTypeConverter converter = new TwitterTypeConverter(String.class, Activity.class);
