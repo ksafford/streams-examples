@@ -73,7 +73,7 @@
         <module>twitter-profiles-hbase</module>
         <module>twitter-profiles-mongo</module>
         <module>twitter-userstream-local</module>
-        <module>twitter-sample-elasticsearch-and-hdfs</module>
+        <module>twitter-gardenhose-dualwriter</module>
     </modules>
 
     <packaging>pom</packaging>

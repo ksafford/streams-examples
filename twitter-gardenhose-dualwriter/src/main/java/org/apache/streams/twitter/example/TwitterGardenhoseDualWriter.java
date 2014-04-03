@@ -58,7 +58,7 @@ public class TwitterGardenhoseDualWriter {
         ElasticsearchPersistWriter elasticsearchWriter = new ElasticsearchPersistWriter(elasticsearchWriterConfiguration);
 
         builder.newPerpetualStream("provider", stream);
-        builder.addStreamsProcessor("converter", converter, 2, "provider");
+        builder.addStreamsProcessor("converter", converter, 4, "provider");
         builder.addStreamsPersistWriter(ElasticsearchPersistWriter.STREAMS_ID, elasticsearchWriter, 1, "converter");
         builder.addStreamsPersistWriter(WebHdfsPersistWriter.STREAMS_ID, hdfsWriter, 1, "converter");
 
