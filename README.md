@@ -11,3 +11,5 @@ twitter-firehose-storm
 
 #TODO
 storm jar target/twitter-firehose-storm-0.1-SNAPSHOT.jar
+
+**NOTE:** Refer to individual README files in each example to get a better idea how to run them
