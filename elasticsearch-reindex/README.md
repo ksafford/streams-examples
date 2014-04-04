@@ -14,29 +14,30 @@ Example Configuration:
 ----------------------
 
     include "reference"
-    twitter {
-        host = "api.twitter.com"
-        endpoint = "statuses/user_timeline"
-        oauth {
-            consumerKey = ""
-            consumerSecret = ""
-            accessToken = ""
-            accessTokenSecret = ""
-        }
-        follow = [
-            42232950
-        ]
+reindex {
+    source {
+        hosts = [
+            localhost
+        ]
+        port = 9300
+        clusterName = elasticsearch
+        indexes = [
+            userhistory_tweet
+        ]
+        types = [
+            tweet
+        ]
     }
-    elasticsearch {
-        hosts = [
-            localhost
-        ]
-        port = 9300
-        clusterName = elasticsearch
-        index = userhistory_activity
-        type = activity
+    destination {
+        hosts = [
+            localhost
+        ]
+        port = 9300
+        clusterName = elasticsearch
+        index = userhistory_reindex_tweet
+        type = tweet
     }
-
+}
 In the Twitter section you should place all of your relevant authentication keys and whichever Twitter IDs you're looking to follow
 Twitter IDs can be converted from screennames at http://www.gettwitterid.com
 
