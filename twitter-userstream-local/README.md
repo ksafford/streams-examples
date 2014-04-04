@@ -35,7 +35,7 @@ Running:
 --------
 
 Once the configuration file has been completed this example can be run with:
-`java -cp ~/git/streams-examples/twitter-userstream-local/target/twitter-userstream-standalone-0.1-SNAPSHOT.jar -Dconfig.file=application.conf org.apache.streams.twitter.example.TwitterUserstreamLocal`
+`java -cp target/twitter-userstream-standalone-0.1-SNAPSHOT.jar -Dconfig.file=src/main/resources/application.conf org.apache.streams.twitter.example.TwitterUserstreamLocal`
 
 Verification:
 -------------
