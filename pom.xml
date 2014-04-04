@@ -74,6 +74,7 @@
         <module>twitter-profiles-mongo</module>
         <module>twitter-userstream-local</module>
         <module>twitter-gardenhose-dualwriter</module>
+        <module>twitter-urls-local</module>
     </modules>
 
     <packaging>pom</packaging>
