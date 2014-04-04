@@ -5,7 +5,7 @@ Requirements:
 -------------
  - A running ElasticSearch 1.0.0+ instance
  - 'head' plugin for ElasticSearch (`elasticsearch/bin/plugin -install mobz/elasticsearch-head`)
- - 'marvel' plugin for ElasticSearch (`elasticsearch/bin/plugin -install mobz/marvel`)
+ - 'marvel' plugin for ElasticSearch (`elasticsearch/bin/plugin -install elasticsearch/marvel/latest`)
 
 This example includes three separate jars: one for indexing tweets, one for indexing activities, and one for indexing retweets.
 Each of these jars require a corresponding configuration file that defines both Twitter and ElasticSearch preferences
