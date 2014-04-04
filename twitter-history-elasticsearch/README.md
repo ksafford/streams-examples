@@ -50,7 +50,7 @@ Running:
 You will need to run `./install_templates.sh` in the resources folder in order to apply the templates to your ES cluster
 
 Once the configuration file has been completed and the templates installed, this example can be run with:
-`java -cp twitter-history-elasticsearch-0.1-SNAPSHOT.jar -Dconfig.file=application.conf org.apache.streams.twitter.example.TwitterHistoryElasticsearch{Tweet|Retweet|Activity}`
+`java -cp target/twitter-history-elasticsearch-0.1-SNAPSHOT.jar -Dconfig.file=src/main/resources/application.conf org.apache.streams.twitter.example.TwitterHistoryElasticsearch{Tweet|Retweet|Activity}`
 
 **NOTE:** the class that you run will depend on what your configuration is set up for. If you set it up for tweets, then you would run:
 org.apache.streams.twitter.example.TwitterHistoryElasticsearchTweet
