@@ -53,7 +53,8 @@ public class ElasticsearchReindex {
         StreamBuilder builder = new LocalStreamBuilder(new LinkedBlockingQueue<StreamsDatum>(1000));
 
         builder.newPerpetualStream(ElasticsearchPersistReader.STREAMS_ID, elasticsearchPersistReader);
-        builder.addStreamsPersistWriter(ElasticsearchPersistWriter.STREAMS_ID, elasticsearchPersistWriter, 1, ElasticsearchPersistReader.STREAMS_ID);
+        builder.addStreamsProcessor("fix_geojson", new ValidateTweetGeopointJson(), 10, ElasticsearchPersistReader.STREAMS_ID);
+        builder.addStreamsPersistWriter(ElasticsearchPersistWriter.STREAMS_ID, elasticsearchPersistWriter, 1, "fix_geojson");
         builder.start();
 
     }
