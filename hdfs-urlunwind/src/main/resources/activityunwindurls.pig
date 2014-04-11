@@ -1,11 +1,11 @@
 REGISTER /home/cloudera/Desktop/hdfs-urlunwind-0.1-SNAPSHOT.jar
 
-DEFINE UNWINDER org.apache.streams.pig.StreamsProcessDocumentExec('org.apache.streams.urls.LinkUnwinderProcessor');
+DEFINE JsonPathExtract InvokeForString('com.jayway.jsonpath.JsonPath', 'String String');
 
-activities = LOAD 'twitter-activity/*' USING PigStorage('\t') AS (activityid: chararray, source: chararray, timestamp: long, object: chararray);
+activities = LOAD 'w2o/twitter/activities/*' USING PigStorage('\t') AS (activityid: chararray, source: chararray, timestamp: long, object: chararray);
 
-unwound = FOREACH activities GENERATE activityid, source, timestamp, UNWINDER(object);
+langs = FOREACH activities GENERATE activityid, source, timestamp, JsonPathExtract.read(object, '$.lang');
 
-result = FILTER unwound BY $3 IS NOT NULL;
+result = FILTER langs BY $3 IS NOT NULL;
 
-STORE result INTO 'twitter-unwound';
+STORE result INTO 'w2o/twitter/langs';

@@ -72,6 +72,7 @@
         <module>twitter-history-elasticsearch</module>
         <module>twitter-profiles-hbase</module>
         <module>twitter-profiles-mongo</module>
+        <module>twitter-userstream-elasticsearch</module>
         <module>twitter-userstream-local</module>
         <module>twitter-gardenhose-dualwriter</module>
     </modules>

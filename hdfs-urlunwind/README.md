@@ -16,7 +16,7 @@ Example Script Configuration:
 
     REGISTER /home/cloudera/Desktop/hdfs-urlunwind-0.1-SNAPSHOT.jar
 
-    DEFINE UNWINDER org.apache.streams.pig.StreamsProcessDocumentExec('org.apache.streams.urls.LinkUnwinderProcessor');
+    DEFINE UNWINDER org.apache.streams.pig.StreamsProcessDocumentExec('org.apache.streams.urls.LinkResolverProcessor');
 
     activities = LOAD 'twitter-activity/*' USING PigStorage('\t') AS (activityid: chararray, source: chararray, timestamp: long, object: chararray);
 
