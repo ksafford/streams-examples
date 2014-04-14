@@ -118,7 +118,7 @@
                                         implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>org.apache.streams.moreover.example.MoreoverMetabaseHdfs</mainClass>
+                                    <mainClass>org.apache.streams.twitter.example.TwitterHistoryElasticsearchActivity</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

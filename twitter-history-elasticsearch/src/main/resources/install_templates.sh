@@ -6,3 +6,4 @@ curl -X PUT 'localhost:9200/_template/streams_standard_analyzer' -d @templates/s
 curl -X PUT 'localhost:9200/_template/streams_lowercase_analyzer' -d @templates/streams_lowercase_analyzer.json
 curl -X PUT 'localhost:9200/_template/tweet' -d @templates/tweet.json
 curl -X PUT 'localhost:9200/_template/activity' -d @templates/activity.json
+curl -X PUT 'localhost:9200/_template/twitteractivity' -d @templates/twitteractivity.json
