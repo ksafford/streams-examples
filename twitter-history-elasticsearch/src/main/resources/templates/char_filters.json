@@ -1,0 +1,38 @@
+{
+    "template" : "*",
+    "order" : 1,
+    "settings" : {
+        "index": {
+            "analysis": {
+                "char_filter" : {
+                    "preserve_tokens" : {
+                        "type" : "mapping",
+                        "mappings" : [
+                            "@=>ATINDOC",
+                            "#=>HASHINDOC",
+                            "&=>AMPINDOC"
+                        ]
+                    },
+                    "preserve_at" : {
+                        "type" : "mapping",
+                        "mappings" : [
+                            "@=>ATINDOC"
+                        ]
+                    },
+                    "preserve_hash" : {
+                        "type" : "mapping",
+                        "mappings" : [
+                            "#=>HASHINDOC"
+                        ]
+                    },
+                    "preserve_amp" : {
+                        "type" : "mapping",
+                        "mappings" : [
+                            "&=>AMPINDOC"
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}
