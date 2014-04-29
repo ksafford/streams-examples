@@ -44,8 +44,8 @@ public class TwitterUserstreamElasticsearch {
         ElasticsearchPersistWriter writer = new ElasticsearchPersistWriter(elasticsearchWriterConfiguration);
 
         builder.newPerpetualStream(TwitterStreamProvider.STREAMS_ID, stream);
-        builder.addStreamsProcessor(TwitterTypeConverter.STREAMS_ID, converter, 2, TwitterStreamProvider.STREAMS_ID);
-        builder.addStreamsPersistWriter(ElasticsearchPersistWriter.STREAMS_ID, writer, 1, TwitterTypeConverter.STREAMS_ID);
+        builder.addStreamsProcessor("converter", converter, 2, TwitterStreamProvider.STREAMS_ID);
+        builder.addStreamsPersistWriter(ElasticsearchPersistWriter.STREAMS_ID, writer, 1, "converter");
         builder.start();
 
     }
