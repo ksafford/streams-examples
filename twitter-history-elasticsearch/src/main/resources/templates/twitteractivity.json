@@ -2065,7 +2065,70 @@
                                     }
                                 }
                             }
-                        }
+                        },
+                        "urls":{
+                          "properties":{
+                             "display_url":{
+                                "type":"string"
+                             },
+                             "expanded_url":{
+                                "type":"string"
+                             },
+                             "indices":{
+                                "type":"long"
+                             },
+                             "url":{
+                                "type":"string"
+                             }
+                          }
+                       },
+                       "user_mentions":{
+                          "properties":{
+                             "displayName":{
+                                "type":"string"
+                             },
+                             "id":{
+                                "type":"string"
+                             }
+                          }
+                       },
+                       "hashtags":{
+                         "properties":{
+                            "indices":{
+                               "type":"long"
+                            },
+                            "text":{
+                               "type":"string"
+                            }
+                         }
+                      },
+                      "likes":{
+                         "properties":{
+                            "count":{
+                               "type":"long"
+                            },
+                            "perspectival":{
+                               "type":"boolean"
+                            }
+                         }
+                      },
+                      "location":{
+                         "properties":{
+                            "id":{
+                               "type":"string"
+                            }
+                         }
+                      },
+                      "rebroadcasts":{
+                         "properties":{
+                            "count":{
+                               "type":"long"
+                            },
+                            "perspectival":{
+                               "type":"boolean"
+                            }
+                         }
+                      }
                     }
                 }
             }
