@@ -65,7 +65,7 @@
     </properties>
 
     <modules>
-        <module>datasift-streaming-console</module>
+        <!--<module>datasift-streaming-console</module>-->
         <module>elasticsearch-backup</module>
         <module>elasticsearch-reindex</module>
         <module>elasticsearch-restore</module>
