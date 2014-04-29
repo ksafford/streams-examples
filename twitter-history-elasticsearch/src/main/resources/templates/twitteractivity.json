@@ -2068,17 +2068,17 @@
                         },
                         "urls":{
                           "properties":{
-                             "display_url":{
+                             "finalURL":{
                                 "type":"string"
                              },
-                             "expanded_url":{
+                             "normalizedURL":{
                                 "type":"string"
                              },
-                             "indices":{
+                             "originalURL":{
+                                "type":"string"
+                             },
+                             "redirectCount":{
                                 "type":"long"
-                             },
-                             "url":{
-                                "type":"string"
                              }
                           }
                        },
