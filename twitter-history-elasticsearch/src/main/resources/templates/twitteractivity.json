@@ -2,7 +2,7 @@
     "template": "*_twitteractivity*",
     "order": 100,
     "mappings": {
-        "activity": {
+        "twitteractivity": {
             "_timestamp": {
                 "enabled": true
             },
@@ -22,9 +22,10 @@
                     "type": "object"
                 },
                 "content": {
+                    "analyzer": "streams_lowercase_analyzer",
                     "fielddata": {
-                        "filter.frequency.max": "0.99",
-                        "filter.frequency.min": "1.0E-4",
+                        "filter.frequency.max": 0.95,
+                        "filter.frequency.min": 0.0001,
                         "filter.frequency.min_segment_size": "500"
                     },
                     "include_in_all": true,
@@ -46,11 +47,15 @@
                     }
                 },
                 "links": {
-                    "include_in_all": false,
-                    "index": "not_analyzed",
-                    "index_options": "docs",
-                    "omit_norms": true,
-                    "type": "string"
+                    "properties": {
+                        "originalURL": {
+                            "include_in_all": false,
+                            "index": "not_analyzed",
+                            "index_options": "docs",
+                            "omit_norms": true,
+                            "type": "string"
+                        }
+                    }
                 },
                 "object": {
                     "dynamic": true,
@@ -106,9 +111,14 @@
                             }
                         },
                         "content": {
-                            "index": "not_analyzed",
-                            "include_in_all": true,
-                            "type": "string"
+                            "analyzer": "streams_lowercase_analyzer",
+                    		"fielddata": {
+			                    "filter.frequency.max": 0.95,
+		                        "filter.frequency.min": 0.0001,
+		                        "filter.frequency.min_segment_size": "500"
+			                },
+                    		"include_in_all": true,
+                    		"type": "string"
                         },
                         "displayName": {
                             "include_in_all": false,
@@ -503,9 +513,14 @@
                             "type": "string"
                         },
                         "title": {
-                            "index": "not_analyzed",
-                            "include_in_all": true,
-                            "type": "string"
+                            "analyzer": "streams_lowercase_analyzer",
+		                    "fielddata": {
+		                        "filter.frequency.max": 0.95,
+		                        "filter.frequency.min": 0.0001,
+		                        "filter.frequency.min_segment_size": "500"
+		                    },
+		                    "include_in_all": true,
+		                    "type": "string"
                         },
                         "updated": {
                             "include_in_all": false,
@@ -541,9 +556,10 @@
                     "type": "date"
                 },
                 "title": {
+                    "analyzer": "streams_lowercase_analyzer",
                     "fielddata": {
-                        "filter.frequency.max": "0.99",
-                        "filter.frequency.min": "1.0E-4",
+                        "filter.frequency.max": 0.99,
+                        "filter.frequency.min": 0.0001,
                         "filter.frequency.min_segment_size": "500"
                     },
                     "include_in_all": true,
@@ -565,20 +581,32 @@
                     "type": "object",
                     "dynamic": "true",
                     "properties": {
-                        "tags": {
+                        "keywords": {
+                            "analyzer": "streams_keyword_analyzer",
                             "fielddata": {
-                                "filter.frequency.max": "0.95",
-                                "filter.frequency.min": "0.01",
+                                "filter.frequency.max": 0.95,
+                                "filter.frequency.min": 0.0001,
                                 "filter.frequency.min_segment_size": "500"
                             },
-                            "include_in_all": true,
+                            "include_in_all": false,
                             "type": "string"
                         },
                         "twitter": {
                             "properties": {
                                 "coordinates": {
-                                    "include_in_all": false,
-                                    "type": "double"
+                                    "properties": {
+                                        "coordinates": {
+                                            "include_in_all": false,
+                                            "type": "double"
+                                        },
+                                        "type": {
+                                            "include_in_all": false,
+                                            "index": "not_analyzed",
+                                            "index_options": "docs",
+                                            "omit_norms": true,
+                                            "type": "string"
+                                        }
+                                    }
                                 },
                                 "created_at": {
                                     "include_in_all": false,
@@ -1450,7 +1478,7 @@
                                             "type": "string"
                                         },
                                         "text": {
-                                            "include_in_all": true,
+                                            "include_in_all": false,
                                             "index": "not_analyzed",
                                             "index_options": "docs",
                                             "omit_norms": true,
@@ -1746,14 +1774,14 @@
                                     "type": "string"
                                 },
                                 "text": {
-                                    "include_in_all": true,
-                                    "analyzer": "streams_standard_analyzer",
+                                    "include_in_all": false,
+                                    "analyzer": "streams_lowercase_analyzer",
                                     "type": "string",
                                     "fielddata": {
                                         "filter": {
                                             "frequency": {
-                                                "min": 0.00001,
-                                                "max": 0.99,
+                                                "max": 0.95,
+                                                "min": 1.0E-4,
                                                 "min_segment_size": 500
                                             }
                                         }

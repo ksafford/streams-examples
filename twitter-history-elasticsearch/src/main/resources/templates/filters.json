@@ -10,13 +10,18 @@
                         "min": 3,
                         "type": "length"
                     },
-                    "pattern_number": {
-                        "pattern": "[\\d]+$",
-                        "replacement": "",
-                        "type": "pattern_replace"
+                    "length_filter_1_25": {
+                        "max": 25,
+                        "min": 1,
+                        "type": "length"
                     },
                     "pattern_http_url": {
                         "pattern": "https?:\\/\\/[a-zA-Z\\-_0-9.]+(?:\\/[a-zA-Z\\-_0-9.]+)*\\/?",
+                        "replacement": "",
+                        "type": "pattern_replace"
+                    },
+                    "pattern_number": {
+                        "pattern": "[\\d]+$",
                         "replacement": "",
                         "type": "pattern_replace"
                     },
@@ -28,6 +33,21 @@
                     "pattern_www_url": {
                         "pattern": "(www){1}[a-zA-Z\\-_0-9.]+(?:\\/[a-zA-Z\\-_0-9.]+)*\\/?",
                         "replacement": "",
+                        "type": "pattern_replace"
+                    },
+                    "pattern_at_in_doc": {
+                        "pattern": "ATINDOC",
+                        "replacement": "@",
+                        "type": "pattern_replace"
+                    },
+                    "pattern_hash_in_doc": {
+                        "pattern": "HASHINDOC",
+                        "replacement": "#",
+                        "type": "pattern_replace"
+                    },
+                    "pattern_amp_in_doc": {
+                        "pattern": "AMPINDOC",
+                        "replacement": "&",
                         "type": "pattern_replace"
                     }
                 }
