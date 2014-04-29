@@ -32,7 +32,7 @@ public class TwitterProfilesMongo {
 
         TwitterStreamConfiguration twitterStreamConfiguration = TwitterStreamConfigurator.detectConfiguration(twitter);
 
-        TwitterStreamProvider provider = new TwitterStreamProvider(twitterStreamConfiguration, ObjectNode.class);
+        TwitterStreamProvider provider = new TwitterStreamProvider(twitterStreamConfiguration);
         TwitterProfileProcessor profile = new TwitterProfileProcessor();
         MongoPersistWriter writer = new MongoPersistWriter();
 

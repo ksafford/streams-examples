@@ -45,7 +45,7 @@ public class TwitterGardenhoseDualWriter {
         StreamBuilder builder = new LocalStreamBuilder(new LinkedBlockingQueue<StreamsDatum>());
 
         TwitterStreamConfiguration twitterStreamConfiguration = TwitterStreamConfigurator.detectConfiguration(twitter);
-        TwitterStreamProvider stream = new TwitterStreamProvider(twitterStreamConfiguration, String.class);
+        TwitterStreamProvider stream = new TwitterStreamProvider(twitterStreamConfiguration);
         TwitterTypeConverter converter = new TwitterTypeConverter(String.class, Activity.class);
 
         HdfsWriterConfiguration hdfsWriterConfiguration = HdfsConfigurator.detectWriterConfiguration(hdfs);

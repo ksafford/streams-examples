@@ -1,0 +1,27 @@
+{
+    "template" : "*",
+    "order" : 10,
+    "settings" : {
+        "index": {
+            "analysis": {
+                "analyzer": {
+                    "streams_keyword_analyzer": {
+                        "char_filter": [
+                            "html_strip"
+                        ],
+                        "filter": [
+                            "pattern_number",
+                            "pattern_http_url",
+                            "pattern_www_url",
+                            "lowercase",
+                            "stop_filter_english",
+                            "length_filter_3_25"
+                        ],
+                        "tokenizer": "uax_url_email",
+                        "type": "custom"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,25 @@
+include "reference"
+twitter {
+<<<<<<< HEAD
+    endpoint = "userstream"
+    oauth {
+        consumerKey = ""
+        consumerSecret = ""
+        accessToken = ""
+        accessTokenSecret = ""
+    }
+}
+=======
+    host = "api.twitter.com"
+    endpoint = "userstream"
+    oauth {
+            consumerKey = "bcg14JThZEGoZ3MZOoT2HnJS7"
+            consumerSecret = "S4dwxnZni58CIJaoupGnUrO4HRHmbBGOb28W6IqOJBx36LPw2z"
+            accessToken = ""
+            accessTokenSecret = ""
+        }
+    follow = [
+           
+    ]
+}
+>>>>>>> f8c0ee4c510b159e38d102c237e5dafe700ab7fa

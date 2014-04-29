@@ -65,7 +65,7 @@
     </properties>
 
     <modules>
-        <module>datasift-streaming-console</module>
+        <!--<module>datasift-streaming-console</module>-->
         <module>elasticsearch-backup</module>
         <module>elasticsearch-reindex</module>
         <module>elasticsearch-restore</module>
@@ -81,7 +81,7 @@
         <module>twitter-profiles-mongo</module>
         <module>twitter-userstream-console</module>
         <module>twitter-userstream-elasticsearch</module>
-        <module>twitter-usermetrics-elasticsearch</module>
+        <!--<module>twitter-usermetrics-elasticsearch</module>-->
         <module>twitter-gardenhose-dualwriter</module>
     </modules>
 
