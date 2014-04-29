@@ -31,7 +31,7 @@ public class TwitterProfilesHbase {
 
         TwitterStreamConfiguration twitterStreamConfiguration = TwitterStreamConfigurator.detectConfiguration(twitter);
 
-        TwitterStreamProvider provider = new TwitterStreamProvider(twitterStreamConfiguration, ObjectNode.class);
+        TwitterStreamProvider provider = new TwitterStreamProvider(twitterStreamConfiguration);
         TwitterProfileProcessor profile = new TwitterProfileProcessor();
         HbasePersistWriter writer = new HbasePersistWriter();
 
