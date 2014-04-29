@@ -7,7 +7,6 @@ import org.apache.streams.core.StreamsDatum;
 import org.apache.streams.elasticsearch.ElasticsearchConfigurator;
 import org.apache.streams.elasticsearch.ElasticsearchPersistWriter;
 import org.apache.streams.elasticsearch.ElasticsearchWriterConfiguration;
-import org.apache.streams.json.JsonPathExtractor;
 import org.apache.streams.local.builders.LocalStreamBuilder;
 import org.apache.streams.core.StreamBuilder;
 import org.apache.streams.pojo.json.Activity;
