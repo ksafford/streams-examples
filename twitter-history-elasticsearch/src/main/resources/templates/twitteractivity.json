@@ -47,15 +47,7 @@
                     }
                 },
                 "links": {
-                    "properties": {
-                        "originalURL": {
-                            "include_in_all": false,
-                            "index": "not_analyzed",
-                            "index_options": "docs",
-                            "omit_norms": true,
-                            "type": "string"
-                        }
-                    }
+                    "type":"string"
                 },
                 "object": {
                     "dynamic": true,
@@ -2098,16 +2090,8 @@
                           }
                        },
                        "hashtags":{
-                         "type": "array",
-                         "items":{
-                            "type": "object",
-                            "properties": {
-                                "text":{
-                                   "type":"string",
-                                   "index":"not_analyzed"
-                                }
-                            }
-                         }
+                           "type":"string",
+                           "analyzer": "streams_lowercase_analyzer"
                       },
                       "likes":{
                          "properties":{
