@@ -8,7 +8,8 @@ import org.apache.streams.core.StreamBuilder;
 import org.apache.streams.core.StreamsDatum;
 import org.apache.streams.local.builders.LocalStreamBuilder;
 import org.apache.streams.mongo.MongoPersistWriter;
-import org.apache.streams.sysomos.SysomosProvider;
+import org.apache.streams.sysomos.org.apache.streams.sysomos.proessor.SysomosTypeConverter;
+import org.apache.streams.sysomos.provider.SysomosProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,11 +43,12 @@ public class SysomosMongo {
         MongoPersistWriter writer = new MongoPersistWriter();
 
         Map<String, Object> streamConfig = Maps.newHashMap();
-        streamConfig.put(LocalStreamBuilder.TIMEOUT_KEY, 10 * 60 * 1000);
+        streamConfig.put(LocalStreamBuilder.TIMEOUT_KEY, 20 * 60 * 1000);
         StreamBuilder builder = new LocalStreamBuilder(new LinkedBlockingQueue<StreamsDatum>(1000), streamConfig);
 
         builder.newPerpetualStream("SysomosProvider", provider);
-        builder.addStreamsPersistWriter("mongo", writer, 1, "SysomosProvider");
+        builder.addStreamsProcessor("SysomosActivityConverter", new SysomosTypeConverter(), 10, "SysomosProvider");
+        builder.addStreamsPersistWriter("mongo", writer, 1, "SysomosActivityConverter");
         builder.start();
     }
 }

@@ -66,6 +66,7 @@
 
     <modules>
         <!--<module>datasift-streaming-console</module>-->
+        <module>sysomos-mongo</module>
         <module>elasticsearch-backup</module>
         <module>elasticsearch-reindex</module>
         <module>elasticsearch-restore</module>
