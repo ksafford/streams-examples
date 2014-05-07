@@ -49,6 +49,8 @@ Also make a note of your numeric twitter ID like this:
         42232950
     ]
 
+Note: bookmark this page, you'll use it again soon.
+
 # Download the tutorial VM #
 
 You can download the VM here: ...
@@ -74,17 +76,15 @@ should output a web page
 
 this will allow you to copy/paste into the terminal
 
-# Prepare to check that your credentials are authorized #
-
-cd streams-examples/twitter-userstream-console
-
-nano src/main/resources/application.conf
-
-provide your credentials under twitter.oauth, and your numeric userid via follow.
-
 # Check that your credentials are authorized #
 
-java -cp target/twitter-userstream-console-0.1-SNAPSHOT.jar org.apache.streams.twitter.example.TwitterUserstreamConsole
+Reopen the page where you created tokens.
 
-if everything is good to go, you will see debug statements as a connection is established, packets start moving, and then a list of all of the individuals you are following flash by.
+Set Request URI: to the suggested value
+https://api.twitter.com/1.1/statuses/home_timeline.json
 
+Click 'See OAuth signature for this request'
+
+Copy the cURL command returned into your VM shell and submit
+
+If all is well, you will get a response from twitter containing tweets.
