@@ -76,6 +76,8 @@
         <!--<module>hdfs-converttoactivity</module>-->
         <!--<module>hdfs-urlunwind</module>-->
         <!--<module>hdfs-pullarticles</module>-->
+        <module>twitter-gardenhose-elasticsearch</module>
+        <module>twitter-gardenhose-dualwriter</module>
         <module>twitter-history-hdfs</module>
         <module>twitter-history-elasticsearch</module>
         <module>twitter-profiles-hbase</module>
@@ -83,7 +85,6 @@
         <module>twitter-userstream-console</module>
         <module>twitter-userstream-elasticsearch</module>
         <!--<module>twitter-usermetrics-elasticsearch</module>-->
-        <module>twitter-gardenhose-dualwriter</module>
     </modules>
 
     <packaging>pom</packaging>
