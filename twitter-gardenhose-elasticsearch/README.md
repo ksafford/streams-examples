@@ -3,11 +3,13 @@ twitter-gardenhose-elasticsearch
 
 Requirements:
 -------------
- - A running instance of ElasticSearch
+ - Authorized Twitter API credentials
+ - A running ElasticSearch 1.0.0+ instance
+ - 'head' plugin for ElasticSearch (`elasticsearch/bin/plugin -install mobz/elasticsearch-head`)
+ - 'marvel' plugin for ElasticSearch (`elasticsearch/bin/plugin -install elasticsearch/marvel/latest`)
 
 Configuration:
 --------------
-    include "reference"
     twitter {
         endpoint = "sample"
         oauth {

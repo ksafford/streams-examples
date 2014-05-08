@@ -34,8 +34,8 @@ public class TwitterUserstreamConsole {
 
         StreamBuilder builder = new LocalStreamBuilder(new LinkedBlockingQueue<StreamsDatum>(100));
 
-        TwitterStreamProvider stream = new TwitterStreamProvider(twitterStreamConfiguration, String.class);
-        TwitterTypeConverter converter = new TwitterTypeConverter(String.class, Activity.class);
+        TwitterStreamProvider stream = new TwitterStreamProvider(twitterStreamConfiguration);
+        TwitterTypeConverter converter = new TwitterTypeConverter(ObjectNode.class, String.class);
         ConsolePersistWriter console = new ConsolePersistWriter();
 
         builder.newPerpetualStream(TwitterStreamProvider.STREAMS_ID, stream);

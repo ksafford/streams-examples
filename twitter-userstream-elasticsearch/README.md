@@ -1,9 +1,12 @@
-twitter-userstream-local
+twitter-userstream-elasticsearch
 ==============================
 
 Requirements:
 -------------
- - An active twitter account
+ - Authorized Twitter API credentials
+ - A running ElasticSearch 1.0.0+ instance
+ - 'head' plugin for ElasticSearch (`elasticsearch/bin/plugin -install mobz/elasticsearch-head`)
+ - 'marvel' plugin for ElasticSearch (`elasticsearch/bin/plugin -install elasticsearch/marvel/latest`)
 
 This example connects to an active twitter account and displays the userstream
 
@@ -23,6 +26,16 @@ Example Configuration:
         follow = [
                 2189174101
         ]
+    }
+    elasticsearch {
+        hosts = [
+            localhost
+        ]
+        port = 9300
+        clusterName = elasticsearch
+        index = userstream_activity
+        type = activity
+        batchSize = 1
     }
 
 The consumerKey and consumerSecret are set for our streams-example application
