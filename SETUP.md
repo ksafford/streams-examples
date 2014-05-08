@@ -48,11 +48,11 @@ Note: bookmark this page, you'll use it again soon.
 
 # Download the tutorial VM #
 
-You can download the VM here: ...
+You can download the VM here: https://dl.dropboxusercontent.com/u/9422012/Apache%20Streams%20Tutorial.zip
 
 # Start the tutorial VM in virtualbox #
 
-Configure the VM for bridged networking on an active connection #
+Configure the VM for bridged networking on an active connection
 
 log in as root : streamstutorial
 
