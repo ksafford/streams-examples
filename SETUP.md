@@ -10,11 +10,6 @@ What? You thought you could make unauthenticated requests? Not with
 Twitter's v1.1 API. You need to visit http://dev.twitter.com/apps and
 click the "Create Application" button.
 
-On this page, fill in whatever details you want. For me, it didn't
-matter, because I just wanted to make a load of block requests to get
-rid of spam followers. The point is you are going to get yourself a
-set of unique keys to use for your application.
-
 So, the point of creating an application is to give yourself (and
 Twitter) a set of keys. These are:
 
@@ -53,11 +48,11 @@ Note: bookmark this page, you'll use it again soon.
 
 # Download the tutorial VM #
 
-You can download the VM here: ...
+You can download the VM here: https://dl.dropboxusercontent.com/u/9422012/Apache%20Streams%20Tutorial.zip
 
 # Start the tutorial VM in virtualbox #
 
-Configure the VM for bridged networking on an active connection #
+Configure the VM for bridged networking on an active connection
 
 log in as root : streamstutorial
 
