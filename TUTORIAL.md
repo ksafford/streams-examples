@@ -1,6 +1,6 @@
 # Perform setup steps to prepare #
 
-[Setup instructions](https://github.com/w2ogroup/streams-examples/SETUP.md "Setup")
+[Setup instructions](https://github.com/w2ogroup/streams-examples/tree/master/SETUP.md "Setup")
 
 # Switch to streamstutorial Branch #
 
