@@ -1,14 +1,36 @@
+# Create a twitter account if you don't have one #
+
+Do you tweet?  And know your twitter password?  If so skip this step.
+
+# Find out your twitter numeric ID #
+
+You can find this out at http://mytwitterid.com/
+
+# Pick an account to analyze #
+
+If you haven't tweeted very often, or don't follow many people, it's OK!
+
+Make a short list of accounts you think might be interesting, and go find their numeric IDs
+
+Collect this list into a snippet that looks like this:
+
+    follow = [
+        42232950
+    ]
+
+You can have multiple accounts in the array - delimited by new-lines, no commas necessary.
+
 # Create a developer account: Set yourself up a developer account on Twitter #
 
 You need to visit the official Twitter developer site and register for
 a developer account. This is a free and necessary step to make
 requests for the v1.1 API.
 
+https://dev.twitter.com/
+
 # Create an application: Create an application on the Twitter developer site #
 
-What? You thought you could make unauthenticated requests? Not with
-Twitter's v1.1 API. You need to visit http://dev.twitter.com/apps and
-click the "Create Application" button.
+Click the "Create Application" button.
 
 So, the point of creating an application is to give yourself (and
 Twitter) a set of keys. These are:
@@ -38,11 +60,6 @@ the bottom again, you'll have some newly generated keys.
 
 You will be placing this snippet in your streams configuration files.
 
-Also make a note of your numeric twitter ID like this:
-
-    follow = [
-        42232950
-    ]
 
 Note: bookmark this page, you'll use it again soon.
 
