@@ -83,6 +83,12 @@ The cURL command is the final check that everything is good to go - copy and pas
 
 By now your VM should be ready to set-up, so let's finish us those steps, and then we'll execute the curl command in the VM.
 
+# Set up the tutorial VM in virtualbox #
+
+In Preferences, set up a new NAT network
+Click port forwarding
+  Create forwarding rules for SSH and Elasticsearch
+
 # Start the tutorial VM in virtualbox #
 
 Configure the VM for bridged networking on an active connection
@@ -93,14 +99,22 @@ log in as root : streamstutorial
 
 'ifconfig' and look for inet address on eth0
 
-if you don't see one, 'ifup eth0' should fix this
+if you don't see one:
+
+service network restart
+ifup eth0
 
 # Confirm that you have a working internet connection #
+
+ping google.com
+should not timeout
 
 curl -X GET https://api.twitter.com
 should output a web page
 
 # Open an ssh session to the virtual machine #
+
+ssh root@127.0.0.1:2222 
 
 this will allow you to copy/paste into the terminal
 
