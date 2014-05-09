@@ -124,6 +124,8 @@ Execute the cURL command from before.
 
 If all is well, you will get a response from twitter containing tweets.
 
+# One last thing... Download this file #
 
+https://raw.githubusercontent.com/w2ogroup/streams-examples/master/twitter-history-elasticsearch/src/main/resources/reports/ActivityReport.json
 
 
