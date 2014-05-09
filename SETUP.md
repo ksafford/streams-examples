@@ -4,7 +4,7 @@ Start downloading the VM here: https://dl.dropboxusercontent.com/u/9422012/Apach
 
 # Create a twitter account if you don't have one #
 
-[CreateTwitter]: Do you tweet?  And know your twitter password?  If so skip this step.
+Do you tweet?  And know your twitter password?  If so skip this step.
 
 # Find out your twitter numeric ID #
 
@@ -85,7 +85,7 @@ By now your VM should be ready to set-up, so let's finish us those steps, and th
 
 # Start the tutorial VM in virtualbox #
 
-[StartVm]: Configure the VM for bridged networking on an active connection
+Configure the VM for bridged networking on an active connection
 
 log in as root : streamstutorial
 
