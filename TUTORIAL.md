@@ -14,11 +14,15 @@ From home directory:
     git pull
     mvn clean package
 
-# Start up elasticsearch
+# Setup and start elasticsearch
 
 From home directory:
 
     cd elasticsearch-1.1.1
+    nano config/elasticsearch.yml
+    
+Edit the # cluster.name line, removing # and selecting a unique name
+        
     bin/elasticsearch &
     
 # Run the twitter history example #
