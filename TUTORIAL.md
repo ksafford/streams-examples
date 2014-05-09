@@ -2,7 +2,7 @@
 
 [Setup instructions](https://github.com/w2ogroup/streams-examples/tree/master/SETUP.md "Setup")
 
-# Switch to streamstutorial Branch #
+# Switch to streamstutorial branch #
 
 From home directory:
 
@@ -14,6 +14,13 @@ From home directory:
     git pull
     mvn clean package
 
+# Start up elasticsearch
+
+From home directory:
+
+    cd elasticsearch-1.1.1
+    bin/elasticsearch &
+    
 # Run the twitter history example #
 
 [Twitter History README](https://github.com/w2ogroup/streams-examples/tree/master/twitter-history-elasticsearch "Twitter History")
