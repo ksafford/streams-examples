@@ -2,18 +2,29 @@
 
 [Setup instructions](https://github.com/w2ogroup/streams-examples/tree/master/SETUP.md "Setup")
 
-# Switch to streamstutorial Branch #
+# Switch to streamstutorial branch #
 
 From home directory:
 
     cd incubator-streams
     git fetch
     git checkout streamstutorial
-    mvn clean install
+    mvn clean install -Dmaven.test.skip=true
     cd ../streams-examples
     git pull
     mvn clean package
 
+# Setup and start elasticsearch
+
+From home directory:
+
+    cd elasticsearch-1.1.1
+    nano config/elasticsearch.yml
+    
+Edit the # cluster.name line, removing # and selecting a unique name
+        
+    bin/elasticsearch &
+    
 # Run the twitter history example #
 
 [Twitter History README](https://github.com/w2ogroup/streams-examples/tree/master/twitter-history-elasticsearch "Twitter History")

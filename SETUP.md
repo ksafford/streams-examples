@@ -1,3 +1,7 @@
+# Download the tutorial VM #
+
+Start downloading the VM here: https://dl.dropboxusercontent.com/u/9422012/Apache%20Streams%20Tutorial.zip
+
 # Create a twitter account if you don't have one #
 
 Do you tweet?  And know your twitter password?  If so skip this step.
@@ -6,19 +10,25 @@ Do you tweet?  And know your twitter password?  If so skip this step.
 
 You can find this out at http://mytwitterid.com/
 
+You have to tweet at least once to be assigned a twitterid!
+
+Why not tell the twitterverse something interesting you've learned, or someone interesting you've met at the conference?
+
 # Pick an account to analyze #
 
 If you haven't tweeted very often, or don't follow many people, it's OK!
 
-Make a short list of accounts you think might be interesting, and go find their numeric IDs
+Make a short list of accounts you think might be interesting, and go find their numeric IDs.
 
-Collect this list into a snippet that looks like this:
+You can analyze the tweets and retweets of @bigdataconf by using the list below.
 
     follow = [
-        42232950
+        969542076
     ]
 
 You can have multiple accounts in the array - delimited by new-lines, no commas necessary.
+
+Place this in a text file on your Desktop for future reference.
 
 # Create a developer account: Set yourself up a developer account on Twitter #
 
@@ -58,14 +68,20 @@ the bottom again, you'll have some newly generated keys.
             accessTokenSecret = ""
     }
 
-You will be placing this snippet in your streams configuration files.
+Place this in a text file on your Desktop for future reference.
 
+You will need to paste it into your configuration files to run your streams.
 
-Note: bookmark this page, you'll use it again soon.
+# Prepare an authorized credentials test #
 
-# Download the tutorial VM #
+Set Request URI: to the suggested value
+https://api.twitter.com/1.1/statuses/home_timeline.json
 
-You can download the VM here: https://dl.dropboxusercontent.com/u/9422012/Apache%20Streams%20Tutorial.zip
+Click 'See OAuth signature for this request'
+
+The cURL command is the final check that everything is good to go - copy and paste it to a text file on your desktop.
+
+By now your VM should be ready to set-up, so let's finish us those steps, and then we'll execute the curl command in the VM.
 
 # Start the tutorial VM in virtualbox #
 
@@ -88,15 +104,12 @@ should output a web page
 
 this will allow you to copy/paste into the terminal
 
-# Check that your credentials are authorized #
+# Final readiness check
 
-Reopen the page where you created tokens.
-
-Set Request URI: to the suggested value
-https://api.twitter.com/1.1/statuses/home_timeline.json
-
-Click 'See OAuth signature for this request'
-
-Copy the cURL command returned into your VM shell and submit
+Execute the cURL command from before.
 
 If all is well, you will get a response from twitter containing tweets.
+
+
+
+
