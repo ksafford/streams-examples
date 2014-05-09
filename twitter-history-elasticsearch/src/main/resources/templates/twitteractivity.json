@@ -1,5 +1,5 @@
 {
-    "template": "*_twitteractivity*",
+    "template": "*_activity*",
     "order": 100,
     "mappings": {
         "twitteractivity": {
