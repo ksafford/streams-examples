@@ -9,7 +9,7 @@ From home directory:
     cd incubator-streams
     git fetch
     git checkout streamstutorial
-    mvn clean install
+    mvn clean install -Dmaven.test.skip=true
     cd ../streams-examples
     git pull
     mvn clean package
