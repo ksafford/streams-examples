@@ -114,7 +114,7 @@ should output a web page
 
 # Open an ssh session to the virtual machine #
 
-ssh root@127.0.0.1:2222 
+ssh root@127.0.0.1 -p 2222 
 
 this will allow you to copy/paste into the terminal
 
