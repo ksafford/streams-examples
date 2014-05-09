@@ -45,6 +45,7 @@ Configuration:
         clusterName = elasticsearch
         index = gardenhose_activity
         type = activity
+        batchSize = 50
     }
 
 You will need to change the Twitter keys to reflect the contents your personal token
