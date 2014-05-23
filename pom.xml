@@ -72,7 +72,7 @@
         <module>elasticsearch-restore</module>
         <module>gmail-export-standalone</module>
         <module>moreover-metabase-hdfs</module>
-        <!--<module>hdfs-biohistory</module>-->
+        <module>hdfs-biohistory</module>
         <!--<module>hdfs-converttoactivity</module>-->
         <!--<module>hdfs-urlunwind</module>-->
         <!--<module>hdfs-pullarticles</module>-->
