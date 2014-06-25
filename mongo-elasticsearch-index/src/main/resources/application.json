@@ -1,0 +1,21 @@
+{
+    "reindex": {
+        "source": {
+            "mongo": {
+                "host": "localhost",
+                "port": 27017,
+                "db": "streamsdb",
+                "collection": "streams"
+            }
+        },
+        "destination": {
+            "hosts": [
+                "localhost"
+            ],
+            "port": 9300,
+            "clusterName": "elasticsearch",
+            "index": "brand-reindex-range_twitteractivity",
+            "type": "twitteractivity"
+        }
+    }
+}
